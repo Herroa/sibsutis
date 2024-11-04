@@ -1,0 +1,39 @@
+(defun my-subsetp (subset set)
+  (cond
+    ((null subset) t) 
+    ((null set) nil) 
+    (t (if (member (car subset) set)
+           (subsetp (cdr subset) set)  
+           nil))))  
+
+(print (my-subsetp '(1 2) '(1 2 3 4)))
+(print (my-subsetp '(1 5) '(1 2 3 4)))
+
+(defun my-set-difference (set1 set2)
+  (cond
+    ((null set1) nil) 
+    ((member (car set1) set2) 
+     (my-set-difference (cdr set1) set2)) 
+    (t (cons (car set1) (my-set-difference (cdr set1) set2))))) 
+
+(print (my-set-difference '(1 2 3) '(2 3 4)))  
+(print (my-set-difference '(a b c) '(b d)))
+
+
+(defun insert-asterisk (lst predicate)
+  (cond
+    ((null lst) nil)  
+    ((funcall predicate (car lst)) 
+     (cons '* (cons (car lst) (insert-asterisk (cdr lst) predicate)))) 
+    (t  
+     (cons (car lst) (insert-asterisk (cdr lst) predicate))))) 
+
+
+(let ((numbers '(-2 -1 0 1 2 3 4 5)))
+  (print (insert-asterisk numbers (lambda (x) (and (numberp x) (>= x 0))))))
+(let ((numbers '(1 2 3 4 5 6)))
+  (print (insert-asterisk numbers 'evenp)))
+
+
+
+

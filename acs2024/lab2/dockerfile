@@ -1,0 +1,8 @@
+
+FROM python:3.9-slim
+
+WORKDIR /app
+
+COPY signal_app.py .
+
+CMD ["python", "signal_app.py"]

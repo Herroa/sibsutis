@@ -1,0 +1,48 @@
+
+
+docker run -d --name my_nginx -p 8080:80 nginx
+-d: Запускает контейнер в фоновом режиме.
+--name my_nginx: Задает имя контейнера.
+-p 8080:80: Пробрасывает порт 80 контейнера на порт 8080 хоста.
+Сетевой доступ: Теперь можно получить доступ к приложению, открыв браузер и перейдя по адресу http://localhost:8080. 
+
+Остановка контейнера: Остановить контейнер можно командой:
+docker stop my_nginx
+
+
+#dockerfile signal_app_py
+FROM python:3.9-slim
+
+WORKDIR /app
+
+COPY signal_app.py .
+
+CMD ["python", "signal_app.py"]
+
+
+#dockerfile signal_app_c
+
+FROM gcc:latest
+
+# Копируем исходный код в контейнер
+COPY signal_app.c /app/signal_app.c
+
+WORKDIR /app
+
+# Компилируем приложение
+RUN gcc -o signal_app signal_app.c
+
+# Запускаем приложение
+CMD ["./signal_app"]
+
+
+
+docker build -t signal_app .
+-t tag
+
+docker exec -it my_nginx bash
+
+docker run -it --rm --name my_signal_app signal_app
+-i interactive
+-t tty (term emulation)
+--rm remove after done

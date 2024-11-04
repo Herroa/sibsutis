@@ -1,0 +1,37 @@
+ssh iv221s07@oak.cpct.sibsutis.ru
+
+scp hello.c iv221s07@oak.cpct.sibsutis.ru:~/hello.c
+
+Компиляция MPI-программ
+# Программа на C
+$ mpicc –Wall –o hello ./hello.c
+# Программа на C++
+$ mpicxx –Wall –o hello ./hello.cpp
+
+
+Запуск MPI-программ на кластере (SLURM)
+сентября 15, 2022 12
+# Формируем паспорт задачи (job-файл)
+$ cat task.job
+#!/bin/sh
+#SBATCH --nodes=3 --ntasks-per-node=2
+#SBATCH --job-name=MyTask
+cd $SLURM_SUBMIT_DIR
+mpiexec ./myprog
+# Ставим задачу в очередь
+$ sbatch ./task.job
+882
+
+
+# Проверяем состояние задачи в очереди
+$ squeue
+JOBID PARTITION NAME USER ST TIME NODES NODELIST(REASON)
+407 debug MyTask mkurnoso R 0:02 1 jet-cn1
+# Проверяем результат
+$ cat ./MyTask.o882
+
+squeue
+sbatch ./task
+scancel
+sinfo
+scontrol show nodes

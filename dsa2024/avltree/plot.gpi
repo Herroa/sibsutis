@@ -1,0 +1,13 @@
+#!/usr/bin/gnuplot -persist
+
+set termoption enhanced
+set terminal svg size 800,600 font "Arial, 16"
+set output "plot.svg"
+
+set style line 1 lc rgb "red" lt 1 lw 4 pt 9 ps 1
+
+set xlabel "Количество элементов"
+set ylabel "Время выполнения, с" rotate by 90
+
+
+plot "avltree.csv" using 1:2 title "lookup" with linespoint ls 1 

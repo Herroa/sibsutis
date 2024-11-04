@@ -1,0 +1,7 @@
+- name: Gather system info
+  hosts: my_hosts
+  tasks:
+    - name: Create structured info file
+      template:
+        src: templates/info.j2
+        dest: /tmp/system_info.yaml

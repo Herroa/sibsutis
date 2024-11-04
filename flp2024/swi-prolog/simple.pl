@@ -1,0 +1,3 @@
+study(mark, book).
+
+swipl

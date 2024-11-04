@@ -1,0 +1,39 @@
+;gnu clisp  2.49.60
+
+(defun insert-in-sorted-list (x L)
+  (cond
+    ;; Если список пуст, просто возвращаем список с единственным элементом x
+    ((null L) (list x))
+    ;; Если x меньше или равен первому элементу, вставляем x перед ним
+    ((<= x (first L)) (cons x L))
+    ;; В противном случае продолжаем искать место для вставки
+    (t (cons (first L) (insert-in-sorted-list x (rest L))))))
+
+;; Пример использования
+(print (insert-in-sorted-list 7 '(0 3 3 6 9)))
+;; Результат: (0 3 3 6 7 9)
+
+
+(defun remove-even-index (L &optional (index 1))
+  (cond
+    ;; Если список пуст, возвращаем пустой список
+    ((null L) nil)
+    ;; Если индекс четный, пропускаем элемент
+    ((evenp index) (remove-even-index (rest L) (+ index 1)))
+    ;; Если индекс нечетный, сохраняем элемент и продолжаем обработку
+    (t (cons (first L) (remove-even-index (rest L) (+ index 1))))))
+
+;; Пример использования
+(print (remove-even-index '(-2 6 s -1 4 f 0 z x r)))
+;; Результат: (-2 s 4 0 x)
+
+
+(defun list-depth (L)
+  (if (atom L)
+      0  ; Если это не список, возвращаем глубину 0
+      (1+ (reduce #'max (mapcar #'list-depth L)))))  ; Увеличиваем глубину на 1 для каждого уровня вложенности
+
+;; Пример использования
+(print (list-depth '((((1))) 2 (3 4))));; Результат: 4
+
+
