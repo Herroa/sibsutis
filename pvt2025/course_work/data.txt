@@ -1,0 +1,5 @@
+procs: 1, total time: 17.290288
+procs: 8, total time: 6.962248
+procs: 16, total time: 3.707130
+procs: 24, total time: 2.457214
+procs: 32, total time: 1.918792
