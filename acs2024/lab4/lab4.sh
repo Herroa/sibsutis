@@ -37,6 +37,7 @@ curl http://localhost
 curl http://localhost
 curl http://localhost
 
+watch -n 0.1 curl http://localhost
 
 
 
@@ -75,6 +76,8 @@ curl http://localhost
 docker-compose down
 docker-compose up -d
 
+docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' backend1
+docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' backend2
 
 sudo ipvsadm -A -t 192.168.1.1:80 -s rr
 sudo ipvsadm -a -t 192.168.1.1:80 -r 192.168.1.2:80 -m
@@ -83,3 +86,4 @@ sudo ipvsadm -L -n
 
 
 sudo systemctl stop ipvsadm
+

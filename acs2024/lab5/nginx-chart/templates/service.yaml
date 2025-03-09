@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}-nginx  # Имя Service (динамическое)
+  labels:
+    app: {{ .Chart.Name }}
+spec:
+  type: {{ .Values.service.type }}  # Тип сервиса (например, ClusterIP)
+  selector:
+    app: {{ .Chart.Name }}
+  ports:
+  - protocol: TCP
+    port: {{ .Values.service.port }}  # Внешний порт
+    targetPort: 80  # Внутренний порт контейнера

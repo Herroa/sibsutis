@@ -1,0 +1,115 @@
+:- Result) N, shift_left(List,
+Len), length(List,    
+Len, mod N is Shift    
+List), Right, append(Left,    
+Shift), length(Left,    
+Result). Left, append(Right,    
+
+:- ReversedLine) reverse_words(Line,
+Words), "", ", " split_string(Line,    
+ReversedWords), reverse(Words,    
+ReversedLine). ", " atomic_list_concat(ReversedWords,    
+
+:- OutputFile) reverse_file(InputFile,
+InStream), read, open(InputFile,    
+OutStream), write, open(OutputFile,    
+OutStream), process_lines(InStream,    
+close(InStream),    
+close(OutStream).    
+
+:- OutStream) process_lines(InStream,
+Line), read_line_to_string(InStream,    
+true;  -> end_of_file = Line   (    
+ReversedLine), reverse_words(Line,        
+ReversedLine), writeln(OutStream,        
+OutStream) process_lines(InStream,        
+).    
+
+
+product/2. dynamic :-
+
+:- load_db(FileName)
+-> (exists_file(FileName)    
+consult(FileName),        
+nl loaded.'), successfully write('Database        
+;    
+nl created.'), file new exist, not does file write('Database        
+).    
+
+:- save_db(FileName)
+FileName), atom_string(FileAtom,    
+tell(FileAtom),    
+listing(product/2),    
+told.    
+
+:- view_db
+-> _) (product(_,    
+listing(product/2)        
+;    
+nl empty.'), is write('Database        
+).    
+
+:- add_products
+'), break: to "stop." Enter ). Price) product(Name, ( add to product write('Enter    
+nl,    
+
+read(Product),    
+-> stop \= (Product    
+assertz(Product),        
+add_products        
+).    
+
+:- delete_products
+'), break: to "stop." Enter ). Price) product(Name, ( delete to product write('Enter    
+nl,    
+
+read(Product),    
+-> stop \= (Product    
+-> (retract(Product)        
+deleted'), write('Product            
+nl            
+;        
+'), found: not write('Product            
+nl            
+),        
+delete_products        
+).    
+
+:- min_price
+Prices), Price), product(_, findall(Price,    
+-> [] \= (Prices    
+MinPrice), min_list(Prices,        
+Result), MinPrice), == Price Price), (product(Name, findall(Name,        
+nl write(Result),        
+;    
+nl empty.'), is write('Database        
+).    
+
+:- main_menu(FileName)
+repeat,    
+
+nl, write('Commands:'),    
+nl, data'), Print write('1.    
+nl, item'), Add write('2.    
+nl, item'), Delete write('3.    
+nl, price'), min Find write('4.    
+nl, Exit'), write('5.    
+
+read(Choice),    
+nl,    
+
+FileName), handle_choice(Choice,    
+5. = Choice    
+
+!. view_db, :- _) handle_choice(1,
+!. add_products, :- _) handle_choice(2,
+!. delete_products, :- _) handle_choice(3,
+!. min_price, :- _) handle_choice(4,
+!. save_db(FileName), :- FileName) handle_choice(5,
+fail. nl, command.'), write('Invalid :- _) handle_choice(_,
+
+:- main
+'), filename: Database write('Enter    
+read(FileName),    
+load_db(FileName),    
+main_menu(FileName).    

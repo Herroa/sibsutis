@@ -1,25 +1,25 @@
 version: "3.7"
+
 services:
   traefik:
     image: traefik:v2.10
+    container_name: traefik
     command:
-      - "--api.insecure=true" # Разрешает доступ к панели управления
-      - "--providers.docker=true" # Включает поддержку Docker провайдера
-      - "--entryPoints.web.address=:80" # Настройка точки входа на порт 80
+      - "--api.insecure=true" # Включаем доступ к панели управления
+      - "--providers.docker=true" # Включаем поддержку Docker как провайдера
+      - "--entryPoints.web.address=:80" # Настраиваем точку входа на порт 80
     ports:
-      - "80:80" # Открывает порт 80 для HTTP
-      - "8080:8080" # Открывает порт 8080 для панели управления Traefik
+      - "80:80" # Проброс порта для HTTP
+      - "8080:8080" # Проброс порта для панели управления
     volumes:
-      - "/var/run/docker.sock:/var/run/docker.sock" # Доступ к Docker API
+      - "/var/run/docker.sock:/var/run/docker.sock" # Даем доступ к Docker API
 
   backend1:
     image: nginx
     container_name: backend1
     labels:
-      - "traefik.http.routers.backend1.rule=Host(`localhost`)"
-      - "traefik.http.services.backend1.loadbalancer.server.port=80"
-    ports:
-      - "8081:80" # Проброс порта 8081 на порт 80 контейнера
+      - "traefik.http.routers.backend1.rule=Host(`backend1.docker.local`)" # Правило маршрутизации
+      - "traefik.http.services.backend1.loadbalancer.server.port=80" # Порт внутри контейнера
     volumes:
       - "./custom-nginx.conf:/etc/nginx/nginx.conf"
 
@@ -27,9 +27,7 @@ services:
     image: nginx
     container_name: backend2
     labels:
-      - "traefik.http.routers.backend2.rule=Host(`localhost`)"
-      - "traefik.http.services.backend2.loadbalancer.server.port=80"
-    ports:
-      - "8082:80" # Проброс порта 8082 на порт 80 контейнера
+      - "traefik.http.routers.backend2.rule=Host(`backend2.docker.local`)" # Правило маршрутизации
+      - "traefik.http.services.backend2.loadbalancer.server.port=80" # Порт внутри контейнера
     volumes:
       - "./custom-nginx.conf:/etc/nginx/nginx.conf"

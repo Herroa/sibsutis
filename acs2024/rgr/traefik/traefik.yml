@@ -1,0 +1,18 @@
+entryPoints:
+  web:
+    address: ":80"
+  websecure:
+    address: ":443"
+
+providers:
+  file:
+    directory: /etc/traefik/conf
+    watch: true
+
+certificatesResolvers:
+  letsencrypt:
+    acme:
+      email: your_email@example.com
+      storage: /acme.json
+      httpChallenge:
+        entryPoint: web

@@ -1,0 +1,9 @@
+groups:
+  - name: example_alerts
+    rules:
+      - alert: HighTestMetric
+        expr: test_metric > 10
+        labels:
+          severity: critical
+        annotations:
+          summary: "Test metric is above 10"

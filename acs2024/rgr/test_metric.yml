@@ -1,0 +1,2 @@
+
+test_metric{job="test_job"} 100

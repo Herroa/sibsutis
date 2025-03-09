@@ -1,0 +1,6 @@
+:- dynamic product/2.
+
+product(hleb, 100).
+product(moloko, 50).
+product(maslo, 50).
+

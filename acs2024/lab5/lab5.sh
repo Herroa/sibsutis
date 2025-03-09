@@ -1,14 +1,15 @@
 качаем minikube kubectl
+minikube start
+
 
 применяем манифесты
-
 kubectl apply -f nginx-deployment.yaml
-
-minikube ip
-/etc/hosts
-
-kubectl get pods -l app=nginx
-
 kubectl describe service nginx-service
 
-nginx.local
+minikube ip
+
+
+kubectl get pods
+kubectl get service nginx-service
+kubectl describe deployment nginx-deployment
+kubectl describe replicaset -l app=nginx
