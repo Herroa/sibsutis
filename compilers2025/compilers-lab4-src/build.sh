@@ -5,7 +5,7 @@ CXXFLAGS="-Wall -I ./src/ -Wno-unused -Wno-deprecated  -Wno-write-strings -Wno-f
 bison -d -v -y -b cool --debug -p cool_yy -o cool-bison-parser.cc cool.bison
 flex -d -o cool-flex-lexer.cc ./cool.flex
 
-g++ $CXXFLAGS -c parser-phase.cc
+g++ $CXXFLAGS -c parser-phase.cc 
 g++ $CXXFLAGS -c utilities.cc -o utilities.o
 g++ $CXXFLAGS -c stringtab.cc
 g++ $CXXFLAGS -c cool-tree.cc

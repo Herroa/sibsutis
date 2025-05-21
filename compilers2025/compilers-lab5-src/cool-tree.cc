@@ -77,9 +77,9 @@ Case branch_class::copy_Case()
 void branch_class::dump(std::ostream &  stream, int n)
 {
     stream << pad(n) << "branch\n";
-    dump_Symbol(stream, n+5, name);
-    dump_Symbol(stream, n+5, type_decl);
-    expr->dump(stream, n+5);
+    dump_Symbol(stream, n+2, name);
+    dump_Symbol(stream, n+2, type_decl);
+    expr->dump(stream, n+2);
 }
 
 Expression assign_class::copy_Expression()
@@ -90,8 +90,8 @@ Expression assign_class::copy_Expression()
 void assign_class::dump(std::ostream &  stream, int n)
 {
     stream << pad(n) << "assign\n";
-    dump_Symbol(stream, n+5, name);
-    expr->dump(stream, n+5);
+    dump_Symbol(stream, n+2, name);
+    expr->dump(stream, n+2);
 }
 
 Expression static_dispatch_class::copy_Expression()
@@ -102,10 +102,10 @@ Expression static_dispatch_class::copy_Expression()
 void static_dispatch_class::dump(std::ostream &  stream, int n)
 {
     stream << pad(n) << "static_dispatch\n";
-    expr->dump(stream, n+5);
-    dump_Symbol(stream, n+5, type_name);
-    dump_Symbol(stream, n+5, name);
-    actual->dump(stream, n+5);
+    expr->dump(stream, n+2);
+    dump_Symbol(stream, n+2, type_name);
+    dump_Symbol(stream, n+2, name);
+    actual->dump(stream, n+2);
 }
 
 Expression dispatch_class::copy_Expression()
@@ -116,9 +116,9 @@ Expression dispatch_class::copy_Expression()
 void dispatch_class::dump(std::ostream &  stream, int n)
 {
     stream << pad(n) << "dispatch\n";
-    expr->dump(stream, n+5);
-    dump_Symbol(stream, n+5, name);
-    actual->dump(stream, n+5);
+    expr->dump(stream, n+2);
+    dump_Symbol(stream, n+2, name);
+    actual->dump(stream, n+2);
 }
 
 
@@ -131,9 +131,9 @@ Expression cond_class::copy_Expression()
 void cond_class::dump(std::ostream &  stream, int n)
 {
     stream << pad(n) << "cond\n";
-    pred->dump(stream, n+5);
-    then_exp->dump(stream, n+5);
-    else_exp->dump(stream, n+5);
+    pred->dump(stream, n+2);
+    then_exp->dump(stream, n+2);
+    else_exp->dump(stream, n+2);
 }
 
 
@@ -146,8 +146,8 @@ Expression loop_class::copy_Expression()
 void loop_class::dump(std::ostream &  stream, int n)
 {
     stream << pad(n) << "loop\n";
-    pred->dump(stream, n+5);
-    body->dump(stream, n+5);
+    pred->dump(stream, n+2);
+    body->dump(stream, n+2);
 }
 
 Expression typcase_class::copy_Expression()
@@ -158,8 +158,8 @@ Expression typcase_class::copy_Expression()
 void typcase_class::dump(std::ostream &  stream, int n)
 {
     stream << pad(n) << "typcase\n";
-    expr->dump(stream, n+5);
-    cases->dump(stream, n+5);
+    expr->dump(stream, n+2);
+    cases->dump(stream, n+2);
 }
 
 Expression block_class::copy_Expression()
@@ -170,7 +170,7 @@ Expression block_class::copy_Expression()
 void block_class::dump(std::ostream &  stream, int n)
 {
     stream << pad(n) << "block\n";
-    body->dump(stream, n+5);
+    body->dump(stream, n+2);
 }
 
 Expression let_class::copy_Expression()
@@ -181,10 +181,10 @@ Expression let_class::copy_Expression()
 void let_class::dump(std::ostream &  stream, int n)
 {
     stream << pad(n) << "let\n";
-    dump_Symbol(stream, n+5, identifier);
-    dump_Symbol(stream, n+5, type_decl);
-    init->dump(stream, n+5);
-    body->dump(stream, n+5);
+    dump_Symbol(stream, n+2, identifier);
+    dump_Symbol(stream, n+2, type_decl);
+    init->dump(stream, n+2);
+    body->dump(stream, n+2);
 }
 
 Expression plus_class::copy_Expression()
@@ -195,8 +195,8 @@ Expression plus_class::copy_Expression()
 void plus_class::dump(std::ostream &  stream, int n)
 {
     stream << pad(n) << "plus\n";
-    e1->dump(stream, n+5);
-    e2->dump(stream, n+5);
+    e1->dump(stream, n+2);
+    e2->dump(stream, n+2);
 }
 
 Expression sub_class::copy_Expression()
@@ -207,8 +207,8 @@ Expression sub_class::copy_Expression()
 void sub_class::dump(std::ostream &  stream, int n)
 {
     stream << pad(n) << "sub\n";
-    e1->dump(stream, n+5);
-    e2->dump(stream, n+5);
+    e1->dump(stream, n+2);
+    e2->dump(stream, n+2);
 }
 
 Expression mul_class::copy_Expression()
@@ -219,8 +219,8 @@ Expression mul_class::copy_Expression()
 void mul_class::dump(std::ostream &  stream, int n)
 {
     stream << pad(n) << "mul\n";
-    e1->dump(stream, n+5);
-    e2->dump(stream, n+5);
+    e1->dump(stream, n+2);
+    e2->dump(stream, n+2);
 }
 
 Expression divide_class::copy_Expression()
@@ -231,8 +231,8 @@ Expression divide_class::copy_Expression()
 void divide_class::dump(std::ostream &  stream, int n)
 {
     stream << pad(n) << "divide\n";
-    e1->dump(stream, n+5);
-    e2->dump(stream, n+5);
+    e1->dump(stream, n+2);
+    e2->dump(stream, n+2);
 }
 
 Expression neg_class::copy_Expression()
@@ -243,7 +243,7 @@ Expression neg_class::copy_Expression()
 void neg_class::dump(std::ostream &  stream, int n)
 {
     stream << pad(n) << "neg\n";
-    e1->dump(stream, n+5);
+    e1->dump(stream, n+2);
 }
 
 Expression lt_class::copy_Expression()
@@ -254,8 +254,8 @@ Expression lt_class::copy_Expression()
 void lt_class::dump(std::ostream &  stream, int n)
 {
     stream << pad(n) << "lt\n";
-    e1->dump(stream, n+5);
-    e2->dump(stream, n+5);
+    e1->dump(stream, n+2);
+    e2->dump(stream, n+2);
 }
 
 Expression eq_class::copy_Expression()
@@ -266,8 +266,8 @@ Expression eq_class::copy_Expression()
 void eq_class::dump(std::ostream &  stream, int n)
 {
     stream << pad(n) << "eq\n";
-    e1->dump(stream, n+5);
-    e2->dump(stream, n+5);
+    e1->dump(stream, n+2);
+    e2->dump(stream, n+2);
 }
 
 Expression leq_class::copy_Expression()
@@ -278,8 +278,8 @@ Expression leq_class::copy_Expression()
 void leq_class::dump(std::ostream &  stream, int n)
 {
     stream << pad(n) << "leq\n";
-    e1->dump(stream, n+5);
-    e2->dump(stream, n+5);
+    e1->dump(stream, n+2);
+    e2->dump(stream, n+2);
 }
 
 Expression comp_class::copy_Expression()
@@ -290,7 +290,7 @@ Expression comp_class::copy_Expression()
 void comp_class::dump(std::ostream &  stream, int n)
 {
     stream << pad(n) << "comp\n";
-    e1->dump(stream, n+5);
+    e1->dump(stream, n+2);
 }
 
 Expression int_const_class::copy_Expression()
@@ -302,7 +302,7 @@ Expression int_const_class::copy_Expression()
 void int_const_class::dump(std::ostream &  stream, int n)
 {
     stream << pad(n) << "int_const\n";
-    dump_Symbol(stream, n+5, token);
+    dump_Symbol(stream, n+2, token);
 }
 
 Expression bool_const_class::copy_Expression()
@@ -313,7 +313,7 @@ Expression bool_const_class::copy_Expression()
 void bool_const_class::dump(std::ostream &  stream, int n)
 {
     stream << pad(n) << "bool_const\n";
-    dump_Boolean(stream, n+5, val);
+    dump_Boolean(stream, n+2, val);
 }
 
 Expression string_const_class::copy_Expression()
@@ -324,7 +324,7 @@ Expression string_const_class::copy_Expression()
 void string_const_class::dump(std::ostream &  stream, int n)
 {
     stream << pad(n) << "string_const\n";
-    dump_Symbol(stream, n+5, token);
+    dump_Symbol(stream, n+2, token);
 }
 
 Expression new__class::copy_Expression()
@@ -335,7 +335,7 @@ Expression new__class::copy_Expression()
 void new__class::dump(std::ostream &  stream, int n)
 {
    stream << pad(n) << "new_\n";
-   dump_Symbol(stream, n+5, type_name);
+   dump_Symbol(stream, n+2, type_name);
 }
 
 
@@ -348,7 +348,7 @@ Expression isvoid_class::copy_Expression()
 void isvoid_class::dump(std::ostream &  stream, int n)
 {
    stream << pad(n) << "isvoid\n";
-   e1->dump(stream, n+5);
+   e1->dump(stream, n+2);
 }
 
 Expression no_expr_class::copy_Expression()
@@ -369,7 +369,7 @@ Expression object_class::copy_Expression()
 void object_class::dump(std::ostream &  stream, int n)
 {
    stream << pad(n) << "object\n";
-   dump_Symbol(stream, n+5, name);
+   dump_Symbol(stream, n+2, name);
 }
 
 // Interfaces used by Bison
@@ -702,7 +702,7 @@ void program_class::dump_with_types(std::ostream &  stream, int n)
    dump_line(stream,n,this);
    stream << pad(n) << "_program\n";
    for(int i = classes->first(); classes->more(i); i = classes->next(i))
-     classes->nth(i)->dump_with_types(stream, n+5);
+     classes->nth(i)->dump_with_types(stream, n+2);
 }
 
 //
@@ -713,14 +713,14 @@ void class__class::dump_with_types(std::ostream &  stream, int n)
 {
    dump_line(stream,n,this);
    stream << pad(n) << "_class\n";
-   dump_Symbol(stream, n+5, name);
-   dump_Symbol(stream, n+5, parent);
-   stream << pad(n+5) << "\"";
+   dump_Symbol(stream, n+2, name);
+   dump_Symbol(stream, n+2, parent);
+   stream << pad(n+2) << "\"";
    print_escaped_string(stream, filename->get_string());
-   stream << "\"\n" << pad(n+5) << "(\n";
+   stream << "\"\n" << pad(n+2) << "(\n";
    for(int i = features->first(); features->more(i); i = features->next(i))
-     features->nth(i)->dump_with_types(stream, n+5);
-   stream << pad(n+5) << ")\n";
+     features->nth(i)->dump_with_types(stream, n+2);
+   stream << pad(n+2) << ")\n";
 }
 
 
@@ -735,11 +735,11 @@ void method_class::dump_with_types(std::ostream &  stream, int n)
 {
    dump_line(stream,n,this);
    stream << pad(n) << "_method\n";
-   dump_Symbol(stream, n+5, name);
+   dump_Symbol(stream, n+2, name);
    for(int i = formals->first(); formals->more(i); i = formals->next(i))
-     formals->nth(i)->dump_with_types(stream, n+5);
-   dump_Symbol(stream, n+5, return_type);
-   expr->dump_with_types(stream, n+5);
+     formals->nth(i)->dump_with_types(stream, n+2);
+   dump_Symbol(stream, n+2, return_type);
+   expr->dump_with_types(stream, n+2);
 }
 
 //
@@ -750,9 +750,9 @@ void attr_class::dump_with_types(std::ostream &  stream, int n)
 {
    dump_line(stream,n,this);
    stream << pad(n) << "_attr\n";
-   dump_Symbol(stream, n+5, name);
-   dump_Symbol(stream, n+5, type_decl);
-   init->dump_with_types(stream, n+5);
+   dump_Symbol(stream, n+2, name);
+   dump_Symbol(stream, n+2, type_decl);
+   init->dump_with_types(stream, n+2);
 }
 
 //
@@ -763,8 +763,8 @@ void formal_class::dump_with_types(std::ostream &  stream, int n)
 {
    dump_line(stream,n,this);
    stream << pad(n) << "_formal\n";
-   dump_Symbol(stream, n+5, name);
-   dump_Symbol(stream, n+5, type_decl);
+   dump_Symbol(stream, n+2, name);
+   dump_Symbol(stream, n+2, type_decl);
 }
 
 //
@@ -775,9 +775,9 @@ void branch_class::dump_with_types(std::ostream &  stream, int n)
 {
    dump_line(stream,n,this);
    stream << pad(n) << "_branch\n";
-   dump_Symbol(stream, n+5, name);
-   dump_Symbol(stream, n+5, type_decl);
-   expr->dump_with_types(stream, n+5);
+   dump_Symbol(stream, n+2, name);
+   dump_Symbol(stream, n+2, type_decl);
+   expr->dump_with_types(stream, n+2);
 }
 
 //
@@ -790,8 +790,8 @@ void assign_class::dump_with_types(std::ostream &  stream, int n)
 {
    dump_line(stream,n,this);
    stream << pad(n) << "_assign\n";
-   dump_Symbol(stream, n+5, name);
-   expr->dump_with_types(stream, n+5);
+   dump_Symbol(stream, n+2, name);
+   expr->dump_with_types(stream, n+2);
    dump_type(stream,n);
 }
 
@@ -804,13 +804,13 @@ void static_dispatch_class::dump_with_types(std::ostream &  stream, int n)
 {
    dump_line(stream,n,this);
    stream << pad(n) << "_static_dispatch\n";
-   expr->dump_with_types(stream, n+5);
-   dump_Symbol(stream, n+5, type_name);
-   dump_Symbol(stream, n+5, name);
-   stream << pad(n+5) << "(\n";
+   expr->dump_with_types(stream, n+2);
+   dump_Symbol(stream, n+2, type_name);
+   dump_Symbol(stream, n+2, name);
+   stream << pad(n+2) << "(\n";
    for(int i = actual->first(); actual->more(i); i = actual->next(i))
-     actual->nth(i)->dump_with_types(stream, n+5);
-   stream << pad(n+5) << ")\n";
+     actual->nth(i)->dump_with_types(stream, n+2);
+   stream << pad(n+2) << ")\n";
    dump_type(stream,n);
 }
 
@@ -822,12 +822,12 @@ void dispatch_class::dump_with_types(std::ostream &  stream, int n)
 {
    dump_line(stream,n,this);
    stream << pad(n) << "_dispatch\n";
-   expr->dump_with_types(stream, n+5);
-   dump_Symbol(stream, n+5, name);
-   stream << pad(n+5) << "(\n";
+   expr->dump_with_types(stream, n+2);
+   dump_Symbol(stream, n+2, name);
+   stream << pad(n+2) << "(\n";
    for(int i = actual->first(); actual->more(i); i = actual->next(i))
-     actual->nth(i)->dump_with_types(stream, n+5);
-   stream << pad(n+5) << ")\n";
+     actual->nth(i)->dump_with_types(stream, n+2);
+   stream << pad(n+2) << ")\n";
    dump_type(stream,n);
 }
 
@@ -839,9 +839,9 @@ void cond_class::dump_with_types(std::ostream &  stream, int n)
 {
    dump_line(stream,n,this);
    stream << pad(n) << "_cond\n";
-   pred->dump_with_types(stream, n+5);
-   then_exp->dump_with_types(stream, n+5);
-   else_exp->dump_with_types(stream, n+5);
+   pred->dump_with_types(stream, n+2);
+   then_exp->dump_with_types(stream, n+2);
+   else_exp->dump_with_types(stream, n+2);
    dump_type(stream,n);
 }
 
@@ -853,8 +853,8 @@ void loop_class::dump_with_types(std::ostream &  stream, int n)
 {
    dump_line(stream,n,this);
    stream << pad(n) << "_loop\n";
-   pred->dump_with_types(stream, n+5);
-   body->dump_with_types(stream, n+5);
+   pred->dump_with_types(stream, n+2);
+   body->dump_with_types(stream, n+2);
    dump_type(stream,n);
 }
 
@@ -867,9 +867,9 @@ void typcase_class::dump_with_types(std::ostream &  stream, int n)
 {
    dump_line(stream,n,this);
    stream << pad(n) << "_typcase\n";
-   expr->dump_with_types(stream, n+5);
+   expr->dump_with_types(stream, n+2);
    for(int i = cases->first(); cases->more(i); i = cases->next(i))
-     cases->nth(i)->dump_with_types(stream, n+5);
+     cases->nth(i)->dump_with_types(stream, n+2);
    dump_type(stream,n);
 }
 
@@ -883,7 +883,7 @@ void block_class::dump_with_types(std::ostream &  stream, int n)
    dump_line(stream,n,this);
    stream << pad(n) << "_block\n";
    for(int i = body->first(); body->more(i); i = body->next(i))
-     body->nth(i)->dump_with_types(stream, n+5);
+     body->nth(i)->dump_with_types(stream, n+2);
    dump_type(stream,n);
 }
 
@@ -891,10 +891,10 @@ void let_class::dump_with_types(std::ostream &  stream, int n)
 {
    dump_line(stream,n,this);
    stream << pad(n) << "_let\n";
-   dump_Symbol(stream, n+5, identifier);
-   dump_Symbol(stream, n+5, type_decl);
-   init->dump_with_types(stream, n+5);
-   body->dump_with_types(stream, n+5);
+   dump_Symbol(stream, n+2, identifier);
+   dump_Symbol(stream, n+2, type_decl);
+   init->dump_with_types(stream, n+2);
+   body->dump_with_types(stream, n+2);
    dump_type(stream,n);
 }
 
@@ -902,8 +902,8 @@ void plus_class::dump_with_types(std::ostream &  stream, int n)
 {
    dump_line(stream,n,this);
    stream << pad(n) << "_plus\n";
-   e1->dump_with_types(stream, n+5);
-   e2->dump_with_types(stream, n+5);
+   e1->dump_with_types(stream, n+2);
+   e2->dump_with_types(stream, n+2);
    dump_type(stream,n);
 }
 
@@ -911,8 +911,8 @@ void sub_class::dump_with_types(std::ostream &  stream, int n)
 {
    dump_line(stream,n,this);
    stream << pad(n) << "_sub\n";
-   e1->dump_with_types(stream, n+5);
-   e2->dump_with_types(stream, n+5);
+   e1->dump_with_types(stream, n+2);
+   e2->dump_with_types(stream, n+2);
    dump_type(stream,n);
 }
 
@@ -920,8 +920,8 @@ void mul_class::dump_with_types(std::ostream &  stream, int n)
 {
    dump_line(stream,n,this);
    stream << pad(n) << "_mul\n";
-   e1->dump_with_types(stream, n+5);
-   e2->dump_with_types(stream, n+5);
+   e1->dump_with_types(stream, n+2);
+   e2->dump_with_types(stream, n+2);
    dump_type(stream,n);
 }
 
@@ -929,8 +929,8 @@ void divide_class::dump_with_types(std::ostream &  stream, int n)
 {
    dump_line(stream,n,this);
    stream << pad(n) << "_divide\n";
-   e1->dump_with_types(stream, n+5);
-   e2->dump_with_types(stream, n+5);
+   e1->dump_with_types(stream, n+2);
+   e2->dump_with_types(stream, n+2);
    dump_type(stream,n);
 }
 
@@ -938,7 +938,7 @@ void neg_class::dump_with_types(std::ostream &  stream, int n)
 {
    dump_line(stream,n,this);
    stream << pad(n) << "_neg\n";
-   e1->dump_with_types(stream, n+5);
+   e1->dump_with_types(stream, n+2);
    dump_type(stream,n);
 }
 
@@ -946,8 +946,8 @@ void lt_class::dump_with_types(std::ostream &  stream, int n)
 {
    dump_line(stream,n,this);
    stream << pad(n) << "_lt\n";
-   e1->dump_with_types(stream, n+5);
-   e2->dump_with_types(stream, n+5);
+   e1->dump_with_types(stream, n+2);
+   e2->dump_with_types(stream, n+2);
    dump_type(stream,n);
 }
 
@@ -956,8 +956,8 @@ void eq_class::dump_with_types(std::ostream &  stream, int n)
 {
    dump_line(stream,n,this);
    stream << pad(n) << "_eq\n";
-   e1->dump_with_types(stream, n+5);
-   e2->dump_with_types(stream, n+5);
+   e1->dump_with_types(stream, n+2);
+   e2->dump_with_types(stream, n+2);
    dump_type(stream,n);
 }
 
@@ -965,8 +965,8 @@ void leq_class::dump_with_types(std::ostream &  stream, int n)
 {
    dump_line(stream,n,this);
    stream << pad(n) << "_leq\n";
-   e1->dump_with_types(stream, n+5);
-   e2->dump_with_types(stream, n+5);
+   e1->dump_with_types(stream, n+2);
+   e2->dump_with_types(stream, n+2);
    dump_type(stream,n);
 }
 
@@ -974,7 +974,7 @@ void comp_class::dump_with_types(std::ostream &  stream, int n)
 {
    dump_line(stream,n,this);
    stream << pad(n) << "_comp\n";
-   e1->dump_with_types(stream, n+5);
+   e1->dump_with_types(stream, n+2);
    dump_type(stream,n);
 }
 
@@ -982,7 +982,7 @@ void int_const_class::dump_with_types(std::ostream &  stream, int n)
 {
    dump_line(stream,n,this);
    stream << pad(n) << "_int\n";
-   dump_Symbol(stream, n+5, token);
+   dump_Symbol(stream, n+2, token);
    dump_type(stream,n);
 }
 
@@ -990,7 +990,7 @@ void bool_const_class::dump_with_types(std::ostream &  stream, int n)
 {
    dump_line(stream,n,this);
    stream << pad(n) << "_bool\n";
-   dump_Boolean(stream, n+5, val);
+   dump_Boolean(stream, n+2, val);
    dump_type(stream,n);
 }
 
@@ -998,7 +998,7 @@ void string_const_class::dump_with_types(std::ostream &  stream, int n)
 {
    dump_line(stream,n,this);
    stream << pad(n) << "_string\n";
-   stream << pad(n+5) << "\"";
+   stream << pad(n+2) << "\"";
    print_escaped_string(stream,token->get_string());
    stream << "\"\n";
    dump_type(stream,n);
@@ -1008,7 +1008,7 @@ void new__class::dump_with_types(std::ostream &  stream, int n)
 {
    dump_line(stream,n,this);
    stream << pad(n) << "_new\n";
-   dump_Symbol(stream, n+5, type_name);
+   dump_Symbol(stream, n+2, type_name);
    dump_type(stream,n);
 }
 
@@ -1016,7 +1016,7 @@ void isvoid_class::dump_with_types(std::ostream &  stream, int n)
 {
    dump_line(stream,n,this);
    stream << pad(n) << "_isvoid\n";
-   e1->dump_with_types(stream, n+5);
+   e1->dump_with_types(stream, n+2);
    dump_type(stream,n);
 }
 
@@ -1031,6 +1031,6 @@ void object_class::dump_with_types(std::ostream &  stream, int n)
 {
    dump_line(stream,n,this);
    stream << pad(n) << "_object\n";
-   dump_Symbol(stream, n+5, name);
+   dump_Symbol(stream, n+2, name);
    dump_type(stream,n);
 }

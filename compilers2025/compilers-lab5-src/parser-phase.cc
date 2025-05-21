@@ -26,7 +26,6 @@ int main(int argc, char **argv)
     lex_verbose  = 0;
 
     for (int i = 1; i < argc; i++) {
-        
         token_file = std::fopen(argv[i], "r");
         if (token_file == NULL) {
             std::cerr << "Error: can not open file " << argv[i] << std::endl;
@@ -40,18 +39,9 @@ int main(int argc, char **argv)
             std::exit(1);
         }
 
-        /* Debug and Testing task 1,2 */
-        std::cerr << "\n Print tree\n";
-        ast_root->dump_with_types(std::cerr, 5);
-        std::cerr << "\n Print idteble\n";
-        idtable.print();
-        std::cerr << "\n Print inttable\n";
-        inttable.print();
-        std::cerr << "\n Print stringtable\n";
-        stringtable.print();
+        /* TODO: dump AST tree (ast_root) to std::cerr */
 
         std::fclose(token_file);
-        
     }
 
     return 0;

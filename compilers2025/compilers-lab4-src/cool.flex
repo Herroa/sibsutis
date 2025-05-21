@@ -136,14 +136,6 @@ DIGIT           [0-9]
     return ERROR;
 }
 
- /* meet a "\\0" ??? */
-<STRING>\\0 {
-    yylval.error_msg = "Unterminated string constant";
-    BEGIN 0;
-    //curr_lineno++;
-    return ERROR;
-}
-
  /* string ends, we need to deal with some escape characters */
 <STRING>\" {
     std::string input(yytext, yyleng);
@@ -192,7 +184,8 @@ DIGIT           [0-9]
         return ERROR;
     }
 
-    /* TODO */
+    /* Lexer + Symbol Table task 1 */
+    cool_yylval.symbol = stringtable.add_string(yytext); 
 
     BEGIN 0;
     return STR_CONST;
@@ -278,7 +271,8 @@ f(?i:alse) {
 
  /* TYPEID */
 [A-Z][A-Za-z0-9_]* {
-    /* TODO*/
+    /* Lexer + Symbol Table task 2 */
+    cool_yylval.symbol = idtable.add_string(yytext);
     return TYPEID;
 }
 
