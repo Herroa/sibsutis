@@ -111,6 +111,13 @@ DIGIT           [0-9]
  /* Cannot read '\\' '\"' '\n' */
 <STRING>[^\\\"\n]* { yymore(); }
 
+ /* handle \0 specifically */
+<STRING>\\0 {
+    yylval.error_msg = "String contains 0 character";
+    BEGIN 0;
+    return ERROR;
+}
+
  /* normal escape characters, not \n */
 <STRING>\\[^\n] { yymore(); }
 
@@ -136,14 +143,6 @@ DIGIT           [0-9]
     return ERROR;
 }
 
- /* meet a "\\0" ??? */
-<STRING>\\0 {
-    yylval.error_msg = "Unterminated string constant";
-    BEGIN 0;
-    //curr_lineno++;
-    return ERROR;
-}
-
  /* string ends, we need to deal with some escape characters */
 <STRING>\" {
     std::string input(yytext, yyleng);
@@ -153,12 +152,6 @@ DIGIT           [0-9]
 
     std::string output = "";
     std::string::size_type pos;
-
-    if (input.find_first_of('\0') != std::string::npos) {
-        yylval.error_msg = "String contains 0 character";
-        BEGIN 0;
-        return ERROR;
-    }
 
     while ((pos = input.find_first_of("\\")) != std::string::npos) {
         output += input.substr(0, pos);
@@ -192,11 +185,12 @@ DIGIT           [0-9]
         return ERROR;
     }
 
-    /* TODO */
-
+    char* str = new char[output.length() + 1];
+    strcpy(str, output.c_str());
+    yylval.symbol = stringtable.add_string(str);
+    delete[] str;
     BEGIN 0;
     return STR_CONST;
-
 }
 
  /* ========
