@@ -1,8 +1,10 @@
+#include <unistd.h>
+
+#include <cstdio>
+
 #include "cool-parse.h"
 #include "cool-tree.h"
 #include "utilities.h"
-#include <cstdio>
-#include <unistd.h>
 
 std::FILE *token_file = stdin;
 extern Classes parse_results;
@@ -25,7 +27,6 @@ int main(int argc, char **argv) {
   lex_verbose = 0;
 
   for (int i = 1; i < argc; i++) {
-
     token_file = std::fopen(argv[i], "r");
     if (token_file == NULL) {
       std::cerr << "Error: can not open file " << argv[i] << std::endl;
