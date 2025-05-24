@@ -301,37 +301,37 @@ f(?i:alse) {
  /* DARROW */
 "=>" { return DARROW; }
 
-"+" { return int('+'); }
+"+" { return '+'; }
 
-"-" { return int('-'); }
+"-" { return '-'; }
 
-"*" { return int('*'); }
+"*" { return '*'; }
 
-"/" { return int('/'); }
+"/" { return '/'; }
 
-"<" { return int('<'); }
+"<" { return '<'; }
 
-"=" { return int('='); }
+"=" { return '='; }
 
-"." { return int('.'); }
+"." { return '.'; }
 
-";" { return int(';'); }
+";" { return ';'; }
 
-"~" { return int('~'); }
+"~" { return '~'; }
 
-"{" { return int('{'); }
+"{" { return '{'; }
 
-"}" { return int('}'); }
+"}" { return '}'; }
 
-"(" { return int('('); }
+"(" { return '('; }
 
-")" { return int(')'); }
+")" { return ')'; }
 
-":" { return int(':'); }
+":" { return ':'; }
 
-"@" { return int('@'); }
+"@" { return '@'; }
 
-"," { return int(','); }
+"," { return ','; }
 
  /* =====
   * error
