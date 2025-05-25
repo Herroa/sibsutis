@@ -55,7 +55,10 @@ Symbol SemanticAnalyzer::type_check_expr(Expression expr, Class_ cls) {
     Symbol t2 = type_check_expr(plus->get_e2(), cls);
 
     if (t1 != idtable.add_string("Int") || t2 != idtable.add_string("Int")) {
-      semant_error(cls, "Operands of '+' must be of type Int.");
+      semant_error(cls,
+                   (std::string("Cannot add ") + t1->get_string() + " and " +
+                    t2->get_string() + ". Both operands must be of type Int.")
+                       .c_str());
       return idtable.add_string("Object");
     }
 
@@ -127,17 +130,36 @@ Symbol SemanticAnalyzer::type_check_expr(Expression expr, Class_ cls) {
     return scope.get_variable_type(name);
   }
 
+  if (auto block = dynamic_cast<block_class *>(expr)) {
+    Symbol last_type = idtable.add_string("Object");
+    for (int i = block->get_body()->first(); block->get_body()->more(i);
+         i = block->get_body()->next(i)) {
+      last_type = type_check_expr(block->get_body()->nth(i), cls);
+    }
+    return last_type;
+  }
+
   if (auto dispatch = dynamic_cast<dispatch_class *>(expr)) {
     Symbol expr_type = type_check_expr(dispatch->get_expr(), cls);
     Symbol method_name = dispatch->get_variable_name();
     Expressions args = dispatch->get_actual();
+
+    if (expr_type == idtable.add_string("Int") ||
+        expr_type == idtable.add_string("String") ||
+        expr_type == idtable.add_string("Bool")) {
+      semant_error(cls, (std::string("Cannot dispatch method '") +
+                         method_name->get_string() + "' on basic type " +
+                         expr_type->get_string())
+                            .c_str());
+      return idtable.add_string("Object");
+    }
 
     Symbol class_to_check = expr_type == idtable.add_string("SELF_TYPE")
                                 ? cls->get_name()
                                 : expr_type;
 
     if (class_map.find(class_to_check) == class_map.end()) {
-      semant_error(cls, (std::string("Dispatch on undefined class") +
+      semant_error(cls, (std::string("Dispatch on undefined class ") +
                          class_to_check->get_string())
                             .c_str());
       return idtable.add_string("Object");
@@ -156,19 +178,18 @@ Symbol SemanticAnalyzer::type_check_expr(Expression expr, Class_ cls) {
     }
 
     if (!found_method) {
-      semant_error(cls, (std::string("Method ") + method_name->get_string() +
-                         std::string(" not found in class ") +
-                         class_to_check->get_string())
+      semant_error(cls, (std::string("Method '") + method_name->get_string() +
+                         "' not found in class " + class_to_check->get_string())
                             .c_str());
       return idtable.add_string("Object");
     }
 
     Formals formals = found_method->get_formals();
     if (formals->len() != args->len()) {
-      semant_error(cls,
-                   (std::string("Wrong number of arguments passed to method ") +
-                    method_name->get_string())
-                       .c_str());
+      semant_error(
+          cls, (std::string("Wrong number of arguments passed to method '") +
+                method_name->get_string() + "'")
+                   .c_str());
       return idtable.add_string("Object");
     }
 
@@ -176,15 +197,18 @@ Symbol SemanticAnalyzer::type_check_expr(Expression expr, Class_ cls) {
       Symbol arg_type = type_check_expr(args->nth(i), cls);
       Symbol expected_type = formals->nth(i)->get_type();
       if (!is_subtype(arg_type, expected_type)) {
-        semant_error(
-            cls,
-            "Type of Argument does not conform to declared parameter type.");
+        semant_error(cls,
+                     (std::string("Type of argument ") + std::to_string(i + 1) +
+                      " does not conform to declared parameter type")
+                         .c_str());
       }
     }
 
     return found_method->get_return_type();
   }
 
+  semant_error(cls,
+               "Unknown or unsupported expression type (possible type error).");
   return idtable.add_string("Object");
 }
 
