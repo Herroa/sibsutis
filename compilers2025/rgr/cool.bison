@@ -126,12 +126,9 @@ class_list :
   /* macro yyerrok -- leave the error state before Bison finds the three good tokens */
 ;
 
-/* Class inherits from the Object class */
 class :
   CLASS TYPEID '{' feature_list '}' ';'
   { $$ = class_($2, idtable.add_string("Object"), $4, stringtable.add_string(curr_filename)); }
-
-/* Grammar + AST task 1 */
 | CLASS TYPEID INHERITS TYPEID '{' feature_list '}' ';'
   { $$ = class_($2, $4, $6, stringtable.add_string(curr_filename)); }
 ;
@@ -230,7 +227,6 @@ expr :
 | expr '*' expr
   { $$ = mul($1, $3); }
 
-/* Grammar + AST task 2 */
 | expr '/' expr
   { $$ = divide($1, $3); }
 

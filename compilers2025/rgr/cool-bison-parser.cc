@@ -597,12 +597,12 @@ static const yytype_int8 yytranslate[] =
 /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int16 yyrline[] =
 {
-       0,   115,   115,   120,   122,   124,   131,   135,   142,   143,
-     148,   150,   152,   157,   158,   160,   165,   171,   172,   174,
-     179,   181,   183,   187,   189,   191,   193,   195,   198,   200,
-     202,   205,   209,   212,   215,   217,   220,   223,   226,   228,
-     230,   234,   237,   239,   241,   243,   245,   248,   254,   255,
-     260,   265,   277,   279,   281,   285,   291,   292
+       0,   115,   115,   120,   122,   124,   130,   132,   139,   140,
+     145,   147,   149,   154,   155,   157,   162,   168,   169,   171,
+     176,   178,   180,   184,   186,   188,   190,   192,   195,   197,
+     199,   202,   206,   209,   212,   214,   217,   220,   223,   225,
+     227,   230,   233,   235,   237,   239,   241,   244,   250,   251,
+     256,   261,   273,   275,   277,   281,   287,   288
 };
 #endif
 
@@ -1415,277 +1415,277 @@ yyreduce:
     break;
 
   case 6: /* class: CLASS TYPEID '{' feature_list '}' ';'  */
-#line 132 "cool.bison"
+#line 131 "cool.bison"
   { (yyval.class_) = class_((yyvsp[-4].symbol), idtable.add_string("Object"), (yyvsp[-2].features), stringtable.add_string(curr_filename)); }
 #line 1421 "cool-bison-parser.cc"
     break;
 
   case 7: /* class: CLASS TYPEID INHERITS TYPEID '{' feature_list '}' ';'  */
-#line 136 "cool.bison"
+#line 133 "cool.bison"
   { (yyval.class_) = class_((yyvsp[-6].symbol), (yyvsp[-4].symbol), (yyvsp[-2].features), stringtable.add_string(curr_filename)); }
 #line 1427 "cool-bison-parser.cc"
     break;
 
   case 8: /* feature_list: %empty  */
-#line 142 "cool.bison"
+#line 139 "cool.bison"
   { (yyval.features) = nil_Features(); }
 #line 1433 "cool-bison-parser.cc"
     break;
 
   case 9: /* feature_list: feature_list feature  */
-#line 144 "cool.bison"
+#line 141 "cool.bison"
   { (yyval.features) = append_Features((yyvsp[-1].features), single_Features((yyvsp[0].feature))); }
 #line 1439 "cool-bison-parser.cc"
     break;
 
   case 10: /* feature: OBJECTID ':' TYPEID optional_assign ';'  */
-#line 149 "cool.bison"
+#line 146 "cool.bison"
   { (yyval.feature) = attr((yyvsp[-4].symbol), (yyvsp[-2].symbol), (yyvsp[-1].expression)); }
 #line 1445 "cool-bison-parser.cc"
     break;
 
   case 11: /* feature: OBJECTID '(' formal_list ')' ':' TYPEID '{' expr '}' ';'  */
-#line 151 "cool.bison"
+#line 148 "cool.bison"
   { (yyval.feature) = method((yyvsp[-9].symbol), (yyvsp[-7].formals), (yyvsp[-4].symbol), (yyvsp[-2].expression)); }
 #line 1451 "cool-bison-parser.cc"
     break;
 
   case 12: /* feature: error ';'  */
-#line 152 "cool.bison"
+#line 149 "cool.bison"
             {}
 #line 1457 "cool-bison-parser.cc"
     break;
 
   case 13: /* formal_list: %empty  */
-#line 157 "cool.bison"
+#line 154 "cool.bison"
   { (yyval.formals) = nil_Formals(); }
 #line 1463 "cool-bison-parser.cc"
     break;
 
   case 14: /* formal_list: formal  */
-#line 159 "cool.bison"
+#line 156 "cool.bison"
   { (yyval.formals) = single_Formals((yyvsp[0].formal)); }
 #line 1469 "cool-bison-parser.cc"
     break;
 
   case 15: /* formal_list: formal_list ',' formal  */
-#line 161 "cool.bison"
+#line 158 "cool.bison"
   { (yyval.formals) = append_Formals((yyvsp[-2].formals), single_Formals((yyvsp[0].formal))); }
 #line 1475 "cool-bison-parser.cc"
     break;
 
   case 16: /* formal: OBJECTID ':' TYPEID  */
-#line 166 "cool.bison"
+#line 163 "cool.bison"
   { (yyval.formal) = formal((yyvsp[-2].symbol), (yyvsp[0].symbol)); }
 #line 1481 "cool-bison-parser.cc"
     break;
 
   case 17: /* expr_list_comma: %empty  */
-#line 171 "cool.bison"
+#line 168 "cool.bison"
   { (yyval.expressions) = nil_Expressions(); }
 #line 1487 "cool-bison-parser.cc"
     break;
 
   case 18: /* expr_list_comma: expr  */
-#line 173 "cool.bison"
+#line 170 "cool.bison"
   { (yyval.expressions) = single_Expressions((yyvsp[0].expression)); }
 #line 1493 "cool-bison-parser.cc"
     break;
 
   case 19: /* expr_list_comma: expr_list_comma ',' expr  */
-#line 175 "cool.bison"
+#line 172 "cool.bison"
   { (yyval.expressions) = append_Expressions((yyvsp[-2].expressions), single_Expressions((yyvsp[0].expression))); }
 #line 1499 "cool-bison-parser.cc"
     break;
 
   case 20: /* expr_list_simicolon: expr ';'  */
-#line 180 "cool.bison"
+#line 177 "cool.bison"
   { (yyval.expressions) = single_Expressions((yyvsp[-1].expression)); }
 #line 1505 "cool-bison-parser.cc"
     break;
 
   case 21: /* expr_list_simicolon: expr_list_simicolon expr ';'  */
-#line 182 "cool.bison"
+#line 179 "cool.bison"
   { (yyval.expressions) = append_Expressions((yyvsp[-2].expressions), single_Expressions((yyvsp[-1].expression))); }
 #line 1511 "cool-bison-parser.cc"
     break;
 
   case 22: /* expr_list_simicolon: error ';'  */
-#line 183 "cool.bison"
+#line 180 "cool.bison"
             { yyerrok; }
 #line 1517 "cool-bison-parser.cc"
     break;
 
   case 23: /* expr: STR_CONST  */
-#line 188 "cool.bison"
+#line 185 "cool.bison"
   { (yyval.expression) = string_const((yyvsp[0].symbol)); }
 #line 1523 "cool-bison-parser.cc"
     break;
 
   case 24: /* expr: INT_CONST  */
-#line 190 "cool.bison"
+#line 187 "cool.bison"
   { (yyval.expression) = int_const((yyvsp[0].symbol)); }
 #line 1529 "cool-bison-parser.cc"
     break;
 
   case 25: /* expr: BOOL_CONST  */
-#line 192 "cool.bison"
+#line 189 "cool.bison"
   { (yyval.expression) = bool_const((yyvsp[0].boolean)); }
 #line 1535 "cool-bison-parser.cc"
     break;
 
   case 26: /* expr: OBJECTID  */
-#line 194 "cool.bison"
+#line 191 "cool.bison"
   { (yyval.expression) = object((yyvsp[0].symbol)); }
 #line 1541 "cool-bison-parser.cc"
     break;
 
   case 27: /* expr: OBJECTID ASSIGN expr  */
-#line 196 "cool.bison"
+#line 193 "cool.bison"
   { (yyval.expression) = assign((yyvsp[-2].symbol), (yyvsp[0].expression)); }
 #line 1547 "cool-bison-parser.cc"
     break;
 
   case 28: /* expr: expr '.' OBJECTID '(' expr_list_comma ')'  */
-#line 199 "cool.bison"
+#line 196 "cool.bison"
   { (yyval.expression) = dispatch((yyvsp[-5].expression), (yyvsp[-3].symbol), (yyvsp[-1].expressions)); }
 #line 1553 "cool-bison-parser.cc"
     break;
 
   case 29: /* expr: OBJECTID '(' expr_list_comma ')'  */
-#line 201 "cool.bison"
+#line 198 "cool.bison"
   { (yyval.expression) = dispatch(object(idtable.add_string("self")), (yyvsp[-3].symbol), (yyvsp[-1].expressions)); }
 #line 1559 "cool-bison-parser.cc"
     break;
 
   case 30: /* expr: expr '@' TYPEID '.' OBJECTID '(' expr_list_comma ')'  */
-#line 203 "cool.bison"
+#line 200 "cool.bison"
   { (yyval.expression) = static_dispatch((yyvsp[-7].expression), (yyvsp[-5].symbol), (yyvsp[-3].symbol), (yyvsp[-1].expressions)); }
 #line 1565 "cool-bison-parser.cc"
     break;
 
   case 31: /* expr: IF expr THEN expr ELSE expr FI  */
-#line 206 "cool.bison"
+#line 203 "cool.bison"
   { (yyval.expression) = cond((yyvsp[-5].expression), (yyvsp[-3].expression), (yyvsp[-1].expression)); }
 #line 1571 "cool-bison-parser.cc"
     break;
 
   case 32: /* expr: WHILE expr LOOP expr POOL  */
-#line 210 "cool.bison"
+#line 207 "cool.bison"
   { (yyval.expression) = loop((yyvsp[-3].expression), (yyvsp[-1].expression)); }
 #line 1577 "cool-bison-parser.cc"
     break;
 
   case 33: /* expr: '{' expr_list_simicolon '}'  */
-#line 213 "cool.bison"
+#line 210 "cool.bison"
   { (yyval.expression) = block((yyvsp[-1].expressions)); }
 #line 1583 "cool-bison-parser.cc"
     break;
 
   case 34: /* expr: let_expr  */
-#line 216 "cool.bison"
+#line 213 "cool.bison"
   { (yyval.expression) = (yyvsp[0].expression); }
 #line 1589 "cool-bison-parser.cc"
     break;
 
   case 35: /* expr: CASE expr OF case_list ESAC  */
-#line 218 "cool.bison"
+#line 215 "cool.bison"
   { (yyval.expression) = typcase((yyvsp[-3].expression), (yyvsp[-1].cases)); }
 #line 1595 "cool-bison-parser.cc"
     break;
 
   case 36: /* expr: NEW TYPEID  */
-#line 221 "cool.bison"
+#line 218 "cool.bison"
   { (yyval.expression) = new_((yyvsp[0].symbol)); }
 #line 1601 "cool-bison-parser.cc"
     break;
 
   case 37: /* expr: ISVOID expr  */
-#line 224 "cool.bison"
+#line 221 "cool.bison"
   { (yyval.expression) = isvoid((yyvsp[0].expression)); }
 #line 1607 "cool-bison-parser.cc"
     break;
 
   case 38: /* expr: expr '+' expr  */
-#line 227 "cool.bison"
+#line 224 "cool.bison"
   { (yyval.expression) = plus((yyvsp[-2].expression), (yyvsp[0].expression)); }
 #line 1613 "cool-bison-parser.cc"
     break;
 
   case 39: /* expr: expr '-' expr  */
-#line 229 "cool.bison"
+#line 226 "cool.bison"
   { (yyval.expression) = sub((yyvsp[-2].expression), (yyvsp[0].expression)); }
 #line 1619 "cool-bison-parser.cc"
     break;
 
   case 40: /* expr: expr '*' expr  */
-#line 231 "cool.bison"
+#line 228 "cool.bison"
   { (yyval.expression) = mul((yyvsp[-2].expression), (yyvsp[0].expression)); }
 #line 1625 "cool-bison-parser.cc"
     break;
 
   case 41: /* expr: expr '/' expr  */
-#line 235 "cool.bison"
+#line 231 "cool.bison"
   { (yyval.expression) = divide((yyvsp[-2].expression), (yyvsp[0].expression)); }
 #line 1631 "cool-bison-parser.cc"
     break;
 
   case 42: /* expr: '~' expr  */
-#line 238 "cool.bison"
+#line 234 "cool.bison"
   { (yyval.expression) = neg((yyvsp[0].expression)); }
 #line 1637 "cool-bison-parser.cc"
     break;
 
   case 43: /* expr: expr '<' expr  */
-#line 240 "cool.bison"
+#line 236 "cool.bison"
   { (yyval.expression) = lt((yyvsp[-2].expression), (yyvsp[0].expression)); }
 #line 1643 "cool-bison-parser.cc"
     break;
 
   case 44: /* expr: expr '=' expr  */
-#line 242 "cool.bison"
+#line 238 "cool.bison"
   { (yyval.expression) = eq((yyvsp[-2].expression), (yyvsp[0].expression)); }
 #line 1649 "cool-bison-parser.cc"
     break;
 
   case 45: /* expr: expr LE expr  */
-#line 244 "cool.bison"
+#line 240 "cool.bison"
   { (yyval.expression) = leq((yyvsp[-2].expression), (yyvsp[0].expression)); }
 #line 1655 "cool-bison-parser.cc"
     break;
 
   case 46: /* expr: NOT expr  */
-#line 246 "cool.bison"
+#line 242 "cool.bison"
   { (yyval.expression) = comp((yyvsp[0].expression)); }
 #line 1661 "cool-bison-parser.cc"
     break;
 
   case 47: /* expr: '(' expr ')'  */
-#line 249 "cool.bison"
+#line 245 "cool.bison"
   { (yyval.expression) = (yyvsp[-1].expression); }
 #line 1667 "cool-bison-parser.cc"
     break;
 
   case 48: /* case_list: %empty  */
-#line 254 "cool.bison"
+#line 250 "cool.bison"
   { (yyval.cases) = nil_Cases(); }
 #line 1673 "cool-bison-parser.cc"
     break;
 
   case 49: /* case_list: case_list case  */
-#line 256 "cool.bison"
+#line 252 "cool.bison"
   { (yyval.cases) = append_Cases((yyvsp[-1].cases), single_Cases((yyvsp[0].case_))); }
 #line 1679 "cool-bison-parser.cc"
     break;
 
   case 50: /* case: OBJECTID ':' TYPEID DARROW expr ';'  */
-#line 261 "cool.bison"
+#line 257 "cool.bison"
   { (yyval.case_) = branch((yyvsp[-5].symbol), (yyvsp[-3].symbol), (yyvsp[-1].expression)); }
 #line 1685 "cool-bison-parser.cc"
     break;
 
   case 51: /* let_expr: LET let_binding_list IN expr  */
-#line 266 "cool.bison"
+#line 262 "cool.bison"
   {
     auto bind = (yyvsp[-2].expression);
     bind->set_body((yyvsp[0].expression));
@@ -1698,37 +1698,37 @@ yyreduce:
     break;
 
   case 52: /* let_binding_list: let_binding  */
-#line 278 "cool.bison"
+#line 274 "cool.bison"
   { (yyval.expression) = (yyvsp[0].expression); }
 #line 1704 "cool-bison-parser.cc"
     break;
 
   case 53: /* let_binding_list: let_binding_list ',' let_binding  */
-#line 280 "cool.bison"
+#line 276 "cool.bison"
   { auto bind = (yyvsp[-2].expression); bind->set_body((yyvsp[0].expression)); (yyval.expression) = (yyvsp[0].expression); }
 #line 1710 "cool-bison-parser.cc"
     break;
 
   case 54: /* let_binding_list: error ',' let_binding  */
-#line 281 "cool.bison"
+#line 277 "cool.bison"
                         { yyerrok; (yyval.expression) = (yyvsp[0].expression); }
 #line 1716 "cool-bison-parser.cc"
     break;
 
   case 55: /* let_binding: OBJECTID ':' TYPEID optional_assign  */
-#line 286 "cool.bison"
+#line 282 "cool.bison"
   { auto res = let((yyvsp[-3].symbol), (yyvsp[-1].symbol), (yyvsp[0].expression), no_expr()); (yyval.expression) = res; }
 #line 1722 "cool-bison-parser.cc"
     break;
 
   case 56: /* optional_assign: %empty  */
-#line 291 "cool.bison"
+#line 287 "cool.bison"
   { (yyval.expression) = no_expr(); }
 #line 1728 "cool-bison-parser.cc"
     break;
 
   case 57: /* optional_assign: ASSIGN expr  */
-#line 293 "cool.bison"
+#line 289 "cool.bison"
   { (yyval.expression) = (yyvsp[0].expression); }
 #line 1734 "cool-bison-parser.cc"
     break;
@@ -1932,7 +1932,7 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 296 "cool.bison"
+#line 292 "cool.bison"
 
 
 void yyerror(char *s)

@@ -2255,82 +2255,82 @@ YY_RULE_SETUP
 case 42:
 YY_RULE_SETUP
 #line 305 "./cool.flex"
-{ return '+'; }
+{ return int('+'); }
 	YY_BREAK
 case 43:
 YY_RULE_SETUP
 #line 307 "./cool.flex"
-{ return '-'; }
+{ return int('-'); }
 	YY_BREAK
 case 44:
 YY_RULE_SETUP
 #line 309 "./cool.flex"
-{ return '*'; }
+{ return int('*'); }
 	YY_BREAK
 case 45:
 YY_RULE_SETUP
 #line 311 "./cool.flex"
-{ return '/'; }
+{ return int('/'); }
 	YY_BREAK
 case 46:
 YY_RULE_SETUP
 #line 313 "./cool.flex"
-{ return '<'; }
+{ return int('<'); }
 	YY_BREAK
 case 47:
 YY_RULE_SETUP
 #line 315 "./cool.flex"
-{ return '='; }
+{ return int('='); }
 	YY_BREAK
 case 48:
 YY_RULE_SETUP
 #line 317 "./cool.flex"
-{ return '.'; }
+{ return int('.'); }
 	YY_BREAK
 case 49:
 YY_RULE_SETUP
 #line 319 "./cool.flex"
-{ return ';'; }
+{ return int(';'); }
 	YY_BREAK
 case 50:
 YY_RULE_SETUP
 #line 321 "./cool.flex"
-{ return '~'; }
+{ return int('~'); }
 	YY_BREAK
 case 51:
 YY_RULE_SETUP
 #line 323 "./cool.flex"
-{ return '{'; }
+{ return int('{'); }
 	YY_BREAK
 case 52:
 YY_RULE_SETUP
 #line 325 "./cool.flex"
-{ return '}'; }
+{ return int('}'); }
 	YY_BREAK
 case 53:
 YY_RULE_SETUP
 #line 327 "./cool.flex"
-{ return '('; }
+{ return int('('); }
 	YY_BREAK
 case 54:
 YY_RULE_SETUP
 #line 329 "./cool.flex"
-{ return ')'; }
+{ return int(')'); }
 	YY_BREAK
 case 55:
 YY_RULE_SETUP
 #line 331 "./cool.flex"
-{ return ':'; }
+{ return int(':'); }
 	YY_BREAK
 case 56:
 YY_RULE_SETUP
 #line 333 "./cool.flex"
-{ return '@'; }
+{ return int('@'); }
 	YY_BREAK
 case 57:
 YY_RULE_SETUP
 #line 335 "./cool.flex"
-{ return ','; }
+{ return int(','); }
 	YY_BREAK
 /* =====
   * error

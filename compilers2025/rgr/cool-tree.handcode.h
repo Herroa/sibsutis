@@ -58,9 +58,12 @@ virtual void dump_with_types(std::ostream & , int) = 0;
 #define program_EXTRAS                          \
 void dump_with_types(std::ostream & , int);            
 
-#define Class__EXTRAS                   \
-virtual Symbol get_filename() = 0;      \
-virtual void dump_with_types(std::ostream & ,int) = 0; 
+#define Class__EXTRAS \
+virtual Symbol get_filename() = 0; \
+virtual void dump_with_types(std::ostream&, int) = 0; \
+virtual Symbol get_name() = 0; \
+virtual Symbol get_parent() = 0; \
+virtual Features get_features() = 0;
 
 
 #define class__EXTRAS                                 \
