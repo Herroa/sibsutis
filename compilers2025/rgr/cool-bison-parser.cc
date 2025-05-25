@@ -101,7 +101,7 @@ extern char *curr_filename;
  */
 extern int node_lineno;
 #define YYLLOC_DEFAULT(Current, Rhs, N)  { Current = Rhs[1]; node_lineno = Current; }
-#define SET_NODELOC(Current)  { node_lineno = Current; }
+#define SET_NODELOC(Current)  { node_lineno = Current->get_line_number(); }
 
 /* Root of AST */
 Program ast_root;
@@ -1416,13 +1416,13 @@ yyreduce:
 
   case 6: /* class: CLASS TYPEID '{' feature_list '}' ';'  */
 #line 131 "cool.bison"
-  { (yyval.class_) = class_((yyvsp[-4].symbol), idtable.add_string("Object"), (yyvsp[-2].features), stringtable.add_string(curr_filename)); }
+  { (yyval.class_) = class_((yyvsp[-4].symbol), idtable.add_string("Object"), (yyvsp[-2].features), stringtable.add_string(curr_filename)); SET_NODELOC((yyval.class_)); }
 #line 1421 "cool-bison-parser.cc"
     break;
 
   case 7: /* class: CLASS TYPEID INHERITS TYPEID '{' feature_list '}' ';'  */
 #line 133 "cool.bison"
-  { (yyval.class_) = class_((yyvsp[-6].symbol), (yyvsp[-4].symbol), (yyvsp[-2].features), stringtable.add_string(curr_filename)); }
+  { (yyval.class_) = class_((yyvsp[-6].symbol), (yyvsp[-4].symbol), (yyvsp[-2].features), stringtable.add_string(curr_filename)); SET_NODELOC((yyval.class_)); }
 #line 1427 "cool-bison-parser.cc"
     break;
 
@@ -1440,13 +1440,13 @@ yyreduce:
 
   case 10: /* feature: OBJECTID ':' TYPEID optional_assign ';'  */
 #line 146 "cool.bison"
-  { (yyval.feature) = attr((yyvsp[-4].symbol), (yyvsp[-2].symbol), (yyvsp[-1].expression)); }
+  { (yyval.feature) = attr((yyvsp[-4].symbol), (yyvsp[-2].symbol), (yyvsp[-1].expression)); SET_NODELOC((yyval.feature)); }
 #line 1445 "cool-bison-parser.cc"
     break;
 
   case 11: /* feature: OBJECTID '(' formal_list ')' ':' TYPEID '{' expr '}' ';'  */
 #line 148 "cool.bison"
-  { (yyval.feature) = method((yyvsp[-9].symbol), (yyvsp[-7].formals), (yyvsp[-4].symbol), (yyvsp[-2].expression)); }
+  { (yyval.feature) = method((yyvsp[-9].symbol), (yyvsp[-7].formals), (yyvsp[-4].symbol), (yyvsp[-2].expression)); SET_NODELOC((yyval.feature)); }
 #line 1451 "cool-bison-parser.cc"
     break;
 
@@ -1476,7 +1476,7 @@ yyreduce:
 
   case 16: /* formal: OBJECTID ':' TYPEID  */
 #line 163 "cool.bison"
-  { (yyval.formal) = formal((yyvsp[-2].symbol), (yyvsp[0].symbol)); }
+  { (yyval.formal) = formal((yyvsp[-2].symbol), (yyvsp[0].symbol)); SET_NODELOC((yyval.formal)); }
 #line 1481 "cool-bison-parser.cc"
     break;
 
@@ -1518,67 +1518,67 @@ yyreduce:
 
   case 23: /* expr: STR_CONST  */
 #line 185 "cool.bison"
-  { (yyval.expression) = string_const((yyvsp[0].symbol)); }
+  { (yyval.expression) = string_const((yyvsp[0].symbol)); SET_NODELOC((yyval.expression)); }
 #line 1523 "cool-bison-parser.cc"
     break;
 
   case 24: /* expr: INT_CONST  */
 #line 187 "cool.bison"
-  { (yyval.expression) = int_const((yyvsp[0].symbol)); }
+  { (yyval.expression) = int_const((yyvsp[0].symbol)); SET_NODELOC((yyval.expression)); }
 #line 1529 "cool-bison-parser.cc"
     break;
 
   case 25: /* expr: BOOL_CONST  */
 #line 189 "cool.bison"
-  { (yyval.expression) = bool_const((yyvsp[0].boolean)); }
+  { (yyval.expression) = bool_const((yyvsp[0].boolean)); SET_NODELOC((yyval.expression)); }
 #line 1535 "cool-bison-parser.cc"
     break;
 
   case 26: /* expr: OBJECTID  */
 #line 191 "cool.bison"
-  { (yyval.expression) = object((yyvsp[0].symbol)); }
+  { (yyval.expression) = object((yyvsp[0].symbol)); SET_NODELOC((yyval.expression)); }
 #line 1541 "cool-bison-parser.cc"
     break;
 
   case 27: /* expr: OBJECTID ASSIGN expr  */
 #line 193 "cool.bison"
-  { (yyval.expression) = assign((yyvsp[-2].symbol), (yyvsp[0].expression)); }
+  { (yyval.expression) = assign((yyvsp[-2].symbol), (yyvsp[0].expression)); SET_NODELOC((yyval.expression)); }
 #line 1547 "cool-bison-parser.cc"
     break;
 
   case 28: /* expr: expr '.' OBJECTID '(' expr_list_comma ')'  */
 #line 196 "cool.bison"
-  { (yyval.expression) = dispatch((yyvsp[-5].expression), (yyvsp[-3].symbol), (yyvsp[-1].expressions)); }
+  { (yyval.expression) = dispatch((yyvsp[-5].expression), (yyvsp[-3].symbol), (yyvsp[-1].expressions)); SET_NODELOC((yyval.expression)); }
 #line 1553 "cool-bison-parser.cc"
     break;
 
   case 29: /* expr: OBJECTID '(' expr_list_comma ')'  */
 #line 198 "cool.bison"
-  { (yyval.expression) = dispatch(object(idtable.add_string("self")), (yyvsp[-3].symbol), (yyvsp[-1].expressions)); }
+  { (yyval.expression) = dispatch(object(idtable.add_string("self")), (yyvsp[-3].symbol), (yyvsp[-1].expressions)); SET_NODELOC((yyval.expression)); }
 #line 1559 "cool-bison-parser.cc"
     break;
 
   case 30: /* expr: expr '@' TYPEID '.' OBJECTID '(' expr_list_comma ')'  */
 #line 200 "cool.bison"
-  { (yyval.expression) = static_dispatch((yyvsp[-7].expression), (yyvsp[-5].symbol), (yyvsp[-3].symbol), (yyvsp[-1].expressions)); }
+  { (yyval.expression) = static_dispatch((yyvsp[-7].expression), (yyvsp[-5].symbol), (yyvsp[-3].symbol), (yyvsp[-1].expressions)); SET_NODELOC((yyval.expression)); }
 #line 1565 "cool-bison-parser.cc"
     break;
 
   case 31: /* expr: IF expr THEN expr ELSE expr FI  */
 #line 203 "cool.bison"
-  { (yyval.expression) = cond((yyvsp[-5].expression), (yyvsp[-3].expression), (yyvsp[-1].expression)); }
+  { (yyval.expression) = cond((yyvsp[-5].expression), (yyvsp[-3].expression), (yyvsp[-1].expression)); SET_NODELOC((yyval.expression)); }
 #line 1571 "cool-bison-parser.cc"
     break;
 
   case 32: /* expr: WHILE expr LOOP expr POOL  */
 #line 207 "cool.bison"
-  { (yyval.expression) = loop((yyvsp[-3].expression), (yyvsp[-1].expression)); }
+  { (yyval.expression) = loop((yyvsp[-3].expression), (yyvsp[-1].expression)); SET_NODELOC((yyval.expression)); }
 #line 1577 "cool-bison-parser.cc"
     break;
 
   case 33: /* expr: '{' expr_list_simicolon '}'  */
 #line 210 "cool.bison"
-  { (yyval.expression) = block((yyvsp[-1].expressions)); }
+  { (yyval.expression) = block((yyvsp[-1].expressions)); SET_NODELOC((yyval.expression)); }
 #line 1583 "cool-bison-parser.cc"
     break;
 
@@ -1590,73 +1590,73 @@ yyreduce:
 
   case 35: /* expr: CASE expr OF case_list ESAC  */
 #line 215 "cool.bison"
-  { (yyval.expression) = typcase((yyvsp[-3].expression), (yyvsp[-1].cases)); }
+  { (yyval.expression) = typcase((yyvsp[-3].expression), (yyvsp[-1].cases)); SET_NODELOC((yyval.expression)); }
 #line 1595 "cool-bison-parser.cc"
     break;
 
   case 36: /* expr: NEW TYPEID  */
 #line 218 "cool.bison"
-  { (yyval.expression) = new_((yyvsp[0].symbol)); }
+  { (yyval.expression) = new_((yyvsp[0].symbol)); SET_NODELOC((yyval.expression)); }
 #line 1601 "cool-bison-parser.cc"
     break;
 
   case 37: /* expr: ISVOID expr  */
 #line 221 "cool.bison"
-  { (yyval.expression) = isvoid((yyvsp[0].expression)); }
+  { (yyval.expression) = isvoid((yyvsp[0].expression)); SET_NODELOC((yyval.expression)); }
 #line 1607 "cool-bison-parser.cc"
     break;
 
   case 38: /* expr: expr '+' expr  */
 #line 224 "cool.bison"
-  { (yyval.expression) = plus((yyvsp[-2].expression), (yyvsp[0].expression)); }
+  { (yyval.expression) = plus((yyvsp[-2].expression), (yyvsp[0].expression)); SET_NODELOC((yyval.expression)); }
 #line 1613 "cool-bison-parser.cc"
     break;
 
   case 39: /* expr: expr '-' expr  */
 #line 226 "cool.bison"
-  { (yyval.expression) = sub((yyvsp[-2].expression), (yyvsp[0].expression)); }
+  { (yyval.expression) = sub((yyvsp[-2].expression), (yyvsp[0].expression)); SET_NODELOC((yyval.expression)); }
 #line 1619 "cool-bison-parser.cc"
     break;
 
   case 40: /* expr: expr '*' expr  */
 #line 228 "cool.bison"
-  { (yyval.expression) = mul((yyvsp[-2].expression), (yyvsp[0].expression)); }
+  { (yyval.expression) = mul((yyvsp[-2].expression), (yyvsp[0].expression)); SET_NODELOC((yyval.expression)); }
 #line 1625 "cool-bison-parser.cc"
     break;
 
   case 41: /* expr: expr '/' expr  */
 #line 231 "cool.bison"
-  { (yyval.expression) = divide((yyvsp[-2].expression), (yyvsp[0].expression)); }
+  { (yyval.expression) = divide((yyvsp[-2].expression), (yyvsp[0].expression)); SET_NODELOC((yyval.expression)); }
 #line 1631 "cool-bison-parser.cc"
     break;
 
   case 42: /* expr: '~' expr  */
 #line 234 "cool.bison"
-  { (yyval.expression) = neg((yyvsp[0].expression)); }
+  { (yyval.expression) = neg((yyvsp[0].expression)); SET_NODELOC((yyval.expression)); }
 #line 1637 "cool-bison-parser.cc"
     break;
 
   case 43: /* expr: expr '<' expr  */
 #line 236 "cool.bison"
-  { (yyval.expression) = lt((yyvsp[-2].expression), (yyvsp[0].expression)); }
+  { (yyval.expression) = lt((yyvsp[-2].expression), (yyvsp[0].expression)); SET_NODELOC((yyval.expression)); }
 #line 1643 "cool-bison-parser.cc"
     break;
 
   case 44: /* expr: expr '=' expr  */
 #line 238 "cool.bison"
-  { (yyval.expression) = eq((yyvsp[-2].expression), (yyvsp[0].expression)); }
+  { (yyval.expression) = eq((yyvsp[-2].expression), (yyvsp[0].expression)); SET_NODELOC((yyval.expression)); }
 #line 1649 "cool-bison-parser.cc"
     break;
 
   case 45: /* expr: expr LE expr  */
 #line 240 "cool.bison"
-  { (yyval.expression) = leq((yyvsp[-2].expression), (yyvsp[0].expression)); }
+  { (yyval.expression) = leq((yyvsp[-2].expression), (yyvsp[0].expression)); SET_NODELOC((yyval.expression)); }
 #line 1655 "cool-bison-parser.cc"
     break;
 
   case 46: /* expr: NOT expr  */
 #line 242 "cool.bison"
-  { (yyval.expression) = comp((yyvsp[0].expression)); }
+  { (yyval.expression) = comp((yyvsp[0].expression)); SET_NODELOC((yyval.expression)); }
 #line 1661 "cool-bison-parser.cc"
     break;
 
@@ -1680,7 +1680,7 @@ yyreduce:
 
   case 50: /* case: OBJECTID ':' TYPEID DARROW expr ';'  */
 #line 257 "cool.bison"
-  { (yyval.case_) = branch((yyvsp[-5].symbol), (yyvsp[-3].symbol), (yyvsp[-1].expression)); }
+  { (yyval.case_) = branch((yyvsp[-5].symbol), (yyvsp[-3].symbol), (yyvsp[-1].expression)); SET_NODELOC((yyval.case_)); }
 #line 1685 "cool-bison-parser.cc"
     break;
 
@@ -1717,7 +1717,7 @@ yyreduce:
 
   case 55: /* let_binding: OBJECTID ':' TYPEID optional_assign  */
 #line 282 "cool.bison"
-  { auto res = let((yyvsp[-3].symbol), (yyvsp[-1].symbol), (yyvsp[0].expression), no_expr()); (yyval.expression) = res; }
+  { auto res = let((yyvsp[-3].symbol), (yyvsp[-1].symbol), (yyvsp[0].expression), no_expr()); SET_NODELOC(res); (yyval.expression) = res; }
 #line 1722 "cool-bison-parser.cc"
     break;
 

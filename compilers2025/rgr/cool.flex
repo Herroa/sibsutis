@@ -43,7 +43,6 @@ extern YYSTYPE cool_yylval;
 
 %}
 
-%option yylineno
 %option noyywrap
 
 DARROW          =>
@@ -53,6 +52,8 @@ DIGIT           [0-9]
 %Start          STRING
 
 %%
+
+\n { curr_lineno++; }
 
  /* Nested comments */
 <INITIAL,COMMENTS,INLINE_COMMENTS>"(*" {
@@ -274,11 +275,6 @@ f(?i:alse) {
     /* Lexer + Symbol Table task 2 */
     cool_yylval.symbol = idtable.add_string(yytext);
     return TYPEID;
-}
-
- /* To treat lines. */
-"\n" {
-    curr_lineno++;
 }
 
  /* OBJECTID */

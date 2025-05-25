@@ -1,9 +1,11 @@
+#include <unistd.h>
+
+#include <cstdio>
+
 #include "cool-parse.h"
 #include "cool-tree.h"
 #include "semant.h"
 #include "utilities.h"
-#include <cstdio>
-#include <unistd.h>
 
 std::FILE *token_file = stdin;
 extern Classes parse_results;

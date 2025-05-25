@@ -24,7 +24,7 @@ extern char *curr_filename;
  */
 extern int node_lineno;
 #define YYLLOC_DEFAULT(Current, Rhs, N)  { Current = Rhs[1]; node_lineno = Current; }
-#define SET_NODELOC(Current)  { node_lineno = Current; }
+#define SET_NODELOC(Current)  { node_lineno = Current->get_line_number(); }
 
 /* Root of AST */
 Program ast_root;
@@ -128,9 +128,9 @@ class_list :
 
 class :
   CLASS TYPEID '{' feature_list '}' ';'
-  { $$ = class_($2, idtable.add_string("Object"), $4, stringtable.add_string(curr_filename)); }
+  { $$ = class_($2, idtable.add_string("Object"), $4, stringtable.add_string(curr_filename)); SET_NODELOC($$); }
 | CLASS TYPEID INHERITS TYPEID '{' feature_list '}' ';'
-  { $$ = class_($2, $4, $6, stringtable.add_string(curr_filename)); }
+  { $$ = class_($2, $4, $6, stringtable.add_string(curr_filename)); SET_NODELOC($$); }
 ;
 
 /* Feature list (may be empty), but no empty features in list */
@@ -143,9 +143,9 @@ feature_list :
 
 feature :
   OBJECTID ':' TYPEID optional_assign ';' /* attribute with initialize */
-  { $$ = attr($1, $3, $4); }
+  { $$ = attr($1, $3, $4); SET_NODELOC($$); }
 | OBJECTID '(' formal_list ')' ':' TYPEID '{' expr '}' ';'
-  { $$ = method($1, $3, $6, $8); }
+  { $$ = method($1, $3, $6, $8); SET_NODELOC($$); }
 | error ';' {}
 ;
 
@@ -160,7 +160,7 @@ formal_list :
 
 formal :
   OBJECTID ':' TYPEID
-  { $$ = formal($1, $3); }
+  { $$ = formal($1, $3); SET_NODELOC($$); }
 ;
 
 expr_list_comma :
@@ -182,64 +182,64 @@ expr_list_simicolon :
 
 expr :
   STR_CONST
-  { $$ = string_const($1); }
+  { $$ = string_const($1); SET_NODELOC($$); }
 | INT_CONST
-  { $$ = int_const($1); }
+  { $$ = int_const($1); SET_NODELOC($$); }
 | BOOL_CONST
-  { $$ = bool_const($1); }
+  { $$ = bool_const($1); SET_NODELOC($$); }
 | OBJECTID
-  { $$ = object($1); }
+  { $$ = object($1); SET_NODELOC($$); }
 | OBJECTID ASSIGN expr
-  { $$ = assign($1, $3); }
+  { $$ = assign($1, $3); SET_NODELOC($$); }
 
 | expr '.' OBJECTID '(' expr_list_comma ')' /* dispatch */
-  { $$ = dispatch($1, $3, $5); }
+  { $$ = dispatch($1, $3, $5); SET_NODELOC($$); }
 | OBJECTID '(' expr_list_comma ')'
-  { $$ = dispatch(object(idtable.add_string("self")), $1, $3); }
+  { $$ = dispatch(object(idtable.add_string("self")), $1, $3); SET_NODELOC($$); }
 | expr '@' TYPEID '.' OBJECTID '(' expr_list_comma ')'
-  { $$ = static_dispatch($1, $3, $5, $7); }
+  { $$ = static_dispatch($1, $3, $5, $7); SET_NODELOC($$); }
 
 | IF expr THEN expr ELSE expr FI
-  { $$ = cond($2, $4, $6); }
+  { $$ = cond($2, $4, $6); SET_NODELOC($$); }
 
 /* Grammar + AST task 3 */
 | WHILE expr LOOP expr POOL
-  { $$ = loop($2, $4); }
+  { $$ = loop($2, $4); SET_NODELOC($$); }
 
 | '{' expr_list_simicolon '}' /* blocks */
-  { $$ = block($2); }
+  { $$ = block($2); SET_NODELOC($$); }
 
 | let_expr
   { $$ = $1; }
 | CASE expr OF case_list ESAC
-  { $$ = typcase($2, $4); }
+  { $$ = typcase($2, $4); SET_NODELOC($$); }
 
 | NEW TYPEID
-  { $$ = new_($2); }
+  { $$ = new_($2); SET_NODELOC($$); }
 
 | ISVOID expr
-  { $$ = isvoid($2); }
+  { $$ = isvoid($2); SET_NODELOC($$); }
 
 | expr '+' expr
-  { $$ = plus($1, $3); }
+  { $$ = plus($1, $3); SET_NODELOC($$); }
 | expr '-' expr
-  { $$ = sub($1, $3); }
+  { $$ = sub($1, $3); SET_NODELOC($$); }
 | expr '*' expr
-  { $$ = mul($1, $3); }
+  { $$ = mul($1, $3); SET_NODELOC($$); }
 
 | expr '/' expr
-  { $$ = divide($1, $3); }
+  { $$ = divide($1, $3); SET_NODELOC($$); }
 
 | '~' expr
-  { $$ = neg($2); }
+  { $$ = neg($2); SET_NODELOC($$); }
 | expr '<' expr
-  { $$ = lt($1, $3); }
+  { $$ = lt($1, $3); SET_NODELOC($$); }
 | expr '=' expr
-  { $$ = eq($1, $3); }
+  { $$ = eq($1, $3); SET_NODELOC($$); }
 | expr LE expr
-  { $$ = leq($1, $3); }
+  { $$ = leq($1, $3); SET_NODELOC($$); }
 | NOT expr
-  { $$ = comp($2); }
+  { $$ = comp($2); SET_NODELOC($$); }
 
 | '(' expr ')'
   { $$ = $2; }
@@ -254,7 +254,7 @@ case_list :
 
 case :
   OBJECTID ':' TYPEID DARROW expr ';'
-  { $$ = branch($1, $3, $5); }
+  { $$ = branch($1, $3, $5); SET_NODELOC($$); }
 ;
 
 let_expr :
@@ -279,7 +279,7 @@ let_binding_list :
 
 let_binding :
   OBJECTID ':' TYPEID optional_assign
-  { auto res = let($1, $3, $4, no_expr()); $$ = res; }
+  { auto res = let($1, $3, $4, no_expr()); SET_NODELOC(res); $$ = res; }
 ;
 
 optional_assign :

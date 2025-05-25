@@ -208,27 +208,8 @@ extern FILE *yyin, *yyout;
 #define EOB_ACT_END_OF_FILE 1
 #define EOB_ACT_LAST_MATCH 2
     
-    /* Note: We specifically omit the test for yy_rule_can_match_eol because it requires
-     *       access to the local variable yy_act. Since yyless() is a macro, it would break
-     *       existing scanners that call yyless() from OUTSIDE yylex.
-     *       One obvious solution it to make yy_act a global. I tried that, and saw
-     *       a 5% performance hit in a non-yylineno scanner, because yy_act is
-     *       normally declared as a register variable-- so it is not worth it.
-     */
-    #define  YY_LESS_LINENO(n) \
-            do { \
-                int yyl;\
-                for ( yyl = n; yyl < yyleng; ++yyl )\
-                    if ( yytext[yyl] == '\n' )\
-                        --yylineno;\
-            }while(0)
-    #define YY_LINENO_REWIND_TO(dst) \
-            do {\
-                const char *p;\
-                for ( p = yy_cp-1; p >= (dst); --p)\
-                    if ( *p == '\n' )\
-                        --yylineno;\
-            }while(0)
+    #define YY_LESS_LINENO(n)
+    #define YY_LINENO_REWIND_TO(ptr)
     
 /* Return all but the first "n" matched characters back to the input stream. */
 #define yyless(n) \
@@ -465,75 +446,75 @@ struct yy_trans_info
 	};
 static const flex_int16_t yy_accept[625] =
     {   0,
-        0,    0,    2,    2,    7,    7,   10,   10,   60,   58,
-       35,   37,    9,   53,   54,   44,   42,   57,   43,   48,
-       45,   32,   55,   49,   46,   47,   56,   36,   36,   36,
-       36,   36,   36,   36,   36,   36,   36,   36,   38,   38,
+        0,    0,    3,    3,    8,    8,   11,   11,   60,   58,
+       36,    1,   10,   53,   54,   44,   42,   57,   43,   48,
+       45,   33,   55,   49,   46,   47,   56,   37,   37,   37,
+       37,   37,   37,   37,   37,   37,   37,   37,   38,   38,
        38,   38,   38,   38,   38,   38,   38,   38,   38,   51,
-       52,   50,    2,    2,    3,    2,    3,    2,    2,    2,
-        2,    2,    2,    2,    2,    2,    2,    2,    2,    2,
-        2,    2,    2,    2,    2,    2,    2,    2,    2,    2,
-        2,    2,    2,    2,    2,    2,    2,    2,    2,    2,
-        2,    2,    2,    7,    7,    8,    7,    7,    7,    7,
+       52,   50,    3,    3,    4,    3,    4,    3,    3,    3,
+        3,    3,    3,    3,    3,    3,    3,    3,    3,    3,
+        3,    3,    3,    3,    3,    3,    3,    3,    3,    3,
+        3,    3,    3,    3,    3,    3,    3,    3,    3,    3,
+        3,    3,    3,    8,    8,    1,    8,    8,    8,    8,
 
-        7,    7,    7,    7,    7,    7,    7,    7,    7,    7,
-        7,    7,    7,    7,    7,    7,    7,    7,    7,    7,
-        7,    7,    7,    7,    7,    7,    7,    7,    7,    7,
-        7,    7,    7,    7,    7,   10,   10,   13,   14,   10,
-       10,   10,   10,   10,   10,   10,   10,   10,   10,   10,
-       10,   10,   10,   10,   10,   10,   10,   10,   10,   10,
-       10,   10,   10,   10,   58,   10,   10,   10,   10,   10,
-       10,   10,   10,   10,   10,   10,   10,   10,   10,   35,
-        1,    5,    6,   32,   39,   40,   41,   36,   36,   36,
-       36,   36,   17,   18,   19,   36,   36,   36,   36,   36,
+        8,    8,    8,    8,    8,    8,    8,    8,    8,    8,
+        8,    8,    8,    8,    8,    8,    8,    8,    8,    8,
+        8,    8,    8,    8,    8,    8,    8,    8,    8,    8,
+        8,    8,    8,    8,    8,   11,   11,    1,   15,   11,
+       11,   11,   11,   11,   11,   11,   11,   11,   11,   11,
+       11,   11,   11,   11,   11,   11,   11,   11,   11,   11,
+       11,   11,   11,   11,   58,   11,   11,   11,   11,   11,
+       11,   11,   11,   11,   11,   11,   11,   11,   11,   36,
+        2,    6,    7,   33,   39,   40,   41,   37,   37,   37,
+       37,   37,   18,   19,   20,   37,   37,   37,   37,   37,
 
-       28,   36,   36,   36,   38,   38,   38,   38,   38,   38,
-       17,   18,   19,   38,   38,   38,   38,   38,   28,   38,
-       38,   38,   38,    2,    2,    4,    2,    2,    2,    2,
-        2,    2,    2,    2,    2,    2,    2,    2,    2,    2,
-        2,    2,    2,    2,    2,    2,    2,    2,    2,    2,
-        2,    2,    2,    2,    2,    2,    2,    2,    2,    2,
-        2,    2,    2,    2,    2,    2,    7,    7,    1,    5,
-        7,    7,    7,    7,    7,    7,    7,    7,    7,    7,
-        7,    7,    7,    7,    7,    7,    7,    7,    7,    7,
-        7,    7,    7,    7,    7,    7,    7,    7,    7,    7,
+       29,   37,   37,   37,   38,   38,   38,   38,   38,   38,
+       18,   19,   20,   38,   38,   38,   38,   38,   29,   38,
+       38,   38,   38,    3,    3,    5,    3,    3,    3,    3,
+        3,    3,    3,    3,    3,    3,    3,    3,    3,    3,
+        3,    3,    3,    3,    3,    3,    3,    3,    3,    3,
+        3,    3,    3,    3,    3,    3,    3,    3,    3,    3,
+        3,    3,    3,    3,    3,    3,    8,    8,    2,    6,
+        8,    8,    8,    8,    8,    8,    8,    8,    8,    8,
+        8,    8,    8,    8,    8,    8,    8,    8,    8,    8,
+        8,    8,    8,    8,    8,    8,    8,    8,    8,    8,
 
-        7,    7,    7,    7,    7,    7,    7,    7,    7,    7,
-       10,   10,    5,   10,   10,   10,   10,   10,   10,   10,
-       10,   10,   10,   10,   10,   10,   10,   10,   10,   10,
-       10,   10,   10,   10,   11,   12,   10,   10,   10,   10,
-       10,   10,   10,   10,   10,   10,   10,   10,   10,   10,
-       10,   10,   10,   10,   10,   36,   36,   36,   36,   36,
-       36,   21,   36,   29,   31,   36,   36,   36,   38,   38,
-       38,   38,   38,   38,   38,   21,   38,   29,   31,   38,
-       38,   38,   38,    2,    2,    2,    2,    2,    2,    2,
-        2,    2,    2,    2,    2,    2,    2,    2,    2,    2,
+        8,    8,    8,    8,    8,    8,    8,    8,    8,    8,
+       11,   11,    6,   11,   11,   11,   11,   11,   11,   11,
+       11,   11,   11,   11,   11,   11,   11,   11,   11,   11,
+       11,   11,   11,   11,   12,   13,   11,   11,   11,   11,
+       11,   11,   11,   11,   11,   11,   11,   11,   11,   11,
+       11,   11,   11,   11,   11,   37,   37,   37,   37,   37,
+       37,   22,   37,   30,   32,   37,   37,   37,   38,   38,
+       38,   38,   38,   38,   38,   22,   38,   30,   32,   38,
+       38,   38,   38,    3,    3,    3,    3,    3,    3,    3,
+        3,    3,    3,    3,    3,    3,    3,    3,    3,    3,
 
-        2,    2,    2,    2,    2,    2,    2,    2,    2,    2,
-        2,    7,    7,    7,    7,    7,    7,    7,    7,    7,
-        7,    7,    7,    7,    7,    7,    7,    7,    7,    7,
-        7,    7,    7,    7,    7,    7,    7,    7,    7,   10,
-       10,   10,   10,   10,   10,   10,   10,   10,   10,   10,
-       10,   10,   10,   10,   10,   10,   10,   10,   10,   10,
-       10,   10,   10,   10,   10,   10,   10,   26,   36,   16,
-       27,   36,   36,   22,   23,   24,   36,   26,   38,   16,
-       27,   38,   38,   38,   22,   23,   24,   33,   38,    2,
-        2,    2,    2,    2,    2,    2,    2,    2,    2,    2,
+        3,    3,    3,    3,    3,    3,    3,    3,    3,    3,
+        3,    8,    8,    8,    8,    8,    8,    8,    8,    8,
+        8,    8,    8,    8,    8,    8,    8,    8,    8,    8,
+        8,    8,    8,    8,    8,    8,    8,    8,    8,   11,
+       11,   11,   11,   11,   11,   11,   11,   11,   11,   11,
+       11,   11,   11,   11,   11,   11,   11,   11,   11,   11,
+       11,   11,   11,   11,   11,   11,   11,   27,   37,   17,
+       28,   37,   37,   23,   24,   25,   37,   27,   38,   17,
+       28,   38,   38,   38,   23,   24,   25,   34,   38,    3,
+        3,    3,    3,    3,    3,    3,    3,    3,    3,    3,
 
-        2,    2,    2,    2,    2,    2,    2,    2,    2,    2,
-        2,    7,    7,    7,    7,    7,    7,    7,    7,    7,
-        7,    7,    7,    7,    7,    7,    7,    7,    7,    7,
-        7,    7,    7,   10,   10,   10,   10,   10,   10,   10,
-       10,   10,   10,   10,   10,   10,   10,   10,   10,   10,
-       10,   10,   10,   10,   10,   15,   36,   36,   25,   15,
-       34,   38,   38,   25,    2,    2,    2,    2,    2,    2,
-        2,    2,    2,    7,    7,    7,    7,    7,    7,    7,
-        7,    7,   10,   10,   10,   10,   10,   10,   10,   10,
-       10,   36,   30,   38,   30,    2,    2,    2,    2,    7,
+        3,    3,    3,    3,    3,    3,    3,    3,    3,    3,
+        3,    8,    8,    8,    8,    8,    8,    8,    8,    8,
+        8,    8,    8,    8,    8,    8,    8,    8,    8,    8,
+        8,    8,    8,   11,   11,   11,   11,   11,   11,   11,
+       11,   11,   11,   11,   11,   11,   11,   11,   11,   11,
+       11,   11,   11,   11,   11,   16,   37,   37,   26,   16,
+       35,   38,   38,   26,    3,    3,    3,    3,    3,    3,
+        3,    3,    3,    8,    8,    8,    8,    8,    8,    8,
+        8,    8,   11,   11,   11,   11,   11,   11,   11,   11,
+       11,   37,   31,   38,   31,    3,    3,    3,    3,    8,
 
-        7,    7,    7,   10,   10,   10,   10,   36,   38,    2,
-        2,    7,    7,   10,   10,   20,   20,    2,    2,    7,
-        7,   10,   10,    0
+        8,    8,    8,   11,   11,   11,   11,   37,   38,    3,
+        3,    8,    8,   11,   11,   21,   21,    3,    3,    8,
+        8,   11,   11,    0
     } ;
 
 static const YY_CHAR yy_ec[256] =
@@ -1418,14 +1399,6 @@ static const flex_int16_t yy_chk[3104] =
       624,  624,  624
     } ;
 
-/* Table of booleans, true if rule could match eol. */
-static const flex_int32_t yy_rule_can_match_eol[60] =
-    {   0,
-0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
-        };
-
 static yy_state_type yy_last_accepting_state;
 static char *yy_last_accepting_cpos;
 
@@ -1434,12 +1407,12 @@ int yy_flex_debug = 1;
 
 static const flex_int16_t yy_rule_linenum[59] =
     {   0,
-       59,   64,   66,   68,   81,   90,   93,   96,  107,  113,
-      116,  119,  133,  141,  202,  205,  208,  211,  214,  217,
-      220,  223,  226,  229,  232,  235,  238,  241,  244,  247,
-      250,  254,  260,  265,  271,  274,  281,  286,  297,  300,
-      303,  305,  307,  309,  311,  313,  315,  317,  319,  321,
-      323,  325,  327,  329,  331,  333,  335,  342
+       56,   59,   64,   66,   68,   81,   90,   93,   96,  107,
+      113,  116,  119,  133,  141,  202,  205,  208,  211,  214,
+      217,  220,  223,  226,  229,  232,  235,  238,  241,  244,
+      247,  250,  254,  260,  265,  271,  274,  281,  292,  295,
+      298,  300,  302,  304,  306,  308,  310,  312,  314,  316,
+      318,  320,  322,  324,  326,  328,  330,  337
     } ;
 
 /* The intent behind this definition is that it'll catch
@@ -1495,9 +1468,9 @@ extern int verbose_flag;
 
 extern YYSTYPE cool_yylval;
 
-#line 1499 "cool-flex-lexer.cc"
+#line 1472 "cool-flex-lexer.cc"
 
-#line 1501 "cool-flex-lexer.cc"
+#line 1474 "cool-flex-lexer.cc"
 
 #define INITIAL 0
 #define COMMENTS 1
@@ -1780,12 +1753,10 @@ YY_DECL
 
 	{
 /* %% [7.0] user's declarations go here */
-#line 55 "./cool.flex"
+#line 54 "./cool.flex"
 
 
-#line 58 "./cool.flex"
- /* Nested comments */
-#line 1789 "cool-flex-lexer.cc"
+#line 1760 "cool-flex-lexer.cc"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -1842,16 +1813,6 @@ yy_find_action:
 
 /* %% [11.0] code for yylineno update goes here */
 
-		if ( yy_act != YY_END_OF_BUFFER && yy_rule_can_match_eol[yy_act] )
-			{
-			int yyl;
-			for ( yyl = (yy_more_len); yyl < yyleng; ++yyl )
-				if ( yytext[yyl] == '\n' )
-					
-    yylineno++;
-;
-			}
-
 do_action:	/* This label is used only to access EOF actions. */
 
 /* %% [12.0] debug code goes here */
@@ -1882,6 +1843,13 @@ do_action:	/* This label is used only to access EOF actions. */
 			goto yy_find_action;
 
 case 1:
+/* rule 1 can match eol */
+YY_RULE_SETUP
+#line 56 "./cool.flex"
+{ curr_lineno++; }
+	YY_BREAK
+/* Nested comments */
+case 2:
 YY_RULE_SETUP
 #line 59 "./cool.flex"
 {
@@ -1889,17 +1857,17 @@ YY_RULE_SETUP
     BEGIN COMMENTS;
 }
 	YY_BREAK
-case 2:
+case 3:
 YY_RULE_SETUP
 #line 64 "./cool.flex"
 { }
 	YY_BREAK
-case 3:
+case 4:
 YY_RULE_SETUP
 #line 66 "./cool.flex"
 { }
 	YY_BREAK
-case 4:
+case 5:
 YY_RULE_SETUP
 #line 68 "./cool.flex"
 {
@@ -1917,7 +1885,7 @@ case YY_STATE_EOF(COMMENTS):
     return ERROR;
 }
 	YY_BREAK
-case 5:
+case 6:
 YY_RULE_SETUP
 #line 81 "./cool.flex"
 {
@@ -1927,20 +1895,20 @@ YY_RULE_SETUP
 	YY_BREAK
 /* Singleline comments */
 /* "--", start inline comment */
-case 6:
+case 7:
 YY_RULE_SETUP
 #line 90 "./cool.flex"
 { BEGIN INLINE_COMMENTS; }
 	YY_BREAK
 /* any character other than '\n' is a nop in inline comments */ 
-case 7:
+case 8:
 YY_RULE_SETUP
 #line 93 "./cool.flex"
 { }
 	YY_BREAK
 /* if seen '\n' in inline comment, the comment ends */
-case 8:
-/* rule 8 can match eol */
+case 9:
+/* rule 9 can match eol */
 YY_RULE_SETUP
 #line 96 "./cool.flex"
 {
@@ -1953,7 +1921,7 @@ YY_RULE_SETUP
    * \n \t \b \f, the result is c.
    */
 /* if seen '\"', start string */
-case 9:
+case 10:
 YY_RULE_SETUP
 #line 107 "./cool.flex"
 {
@@ -1962,20 +1930,20 @@ YY_RULE_SETUP
 }
 	YY_BREAK
 /* Cannot read '\\' '\"' '\n' */
-case 10:
+case 11:
 YY_RULE_SETUP
 #line 113 "./cool.flex"
 { yymore(); }
 	YY_BREAK
 /* normal escape characters, not \n */
-case 11:
+case 12:
 YY_RULE_SETUP
 #line 116 "./cool.flex"
 { yymore(); }
 	YY_BREAK
 /* seen a '\\' at the end of a line, the string continues */
-case 12:
-/* rule 12 can match eol */
+case 13:
+/* rule 13 can match eol */
 YY_RULE_SETUP
 #line 119 "./cool.flex"
 {
@@ -1994,8 +1962,8 @@ case YY_STATE_EOF(STRING):
 }
 	YY_BREAK
 /* meet a '\n' in the middle of a string without a '\\', error */
-case 13:
-/* rule 13 can match eol */
+case 14:
+/* rule 14 can match eol */
 YY_RULE_SETUP
 #line 133 "./cool.flex"
 {
@@ -2006,7 +1974,7 @@ YY_RULE_SETUP
 }
 	YY_BREAK
 /* string ends, we need to deal with some escape characters */
-case 14:
+case 15:
 YY_RULE_SETUP
 #line 141 "./cool.flex"
 {
@@ -2069,109 +2037,109 @@ YY_RULE_SETUP
   * ========
   */
 /* CLASS */
-case 15:
+case 16:
 YY_RULE_SETUP
 #line 202 "./cool.flex"
 { return CLASS; }
 	YY_BREAK
 /* ELSE */
-case 16:
+case 17:
 YY_RULE_SETUP
 #line 205 "./cool.flex"
 { return ELSE; }
 	YY_BREAK
 /* FI */
-case 17:
+case 18:
 YY_RULE_SETUP
 #line 208 "./cool.flex"
 { return FI; }
 	YY_BREAK
 /* IF */
-case 18:
+case 19:
 YY_RULE_SETUP
 #line 211 "./cool.flex"
 { return IF; }
 	YY_BREAK
 /* IN*/
-case 19:
+case 20:
 YY_RULE_SETUP
 #line 214 "./cool.flex"
 { return IN; }
 	YY_BREAK
 /* INHERITS */
-case 20:
+case 21:
 YY_RULE_SETUP
 #line 217 "./cool.flex"
 { return INHERITS; }
 	YY_BREAK
 /* LET */
-case 21:
+case 22:
 YY_RULE_SETUP
 #line 220 "./cool.flex"
 { return LET; }
 	YY_BREAK
 /* LOOP */
-case 22:
+case 23:
 YY_RULE_SETUP
 #line 223 "./cool.flex"
 { return LOOP; }
 	YY_BREAK
 /* POOL */
-case 23:
+case 24:
 YY_RULE_SETUP
 #line 226 "./cool.flex"
 { return POOL; }
 	YY_BREAK
 /* THEN */
-case 24:
+case 25:
 YY_RULE_SETUP
 #line 229 "./cool.flex"
 { return THEN; }
 	YY_BREAK
 /* WHILE */
-case 25:
+case 26:
 YY_RULE_SETUP
 #line 232 "./cool.flex"
 { return WHILE; }
 	YY_BREAK
 /* CASE */
-case 26:
+case 27:
 YY_RULE_SETUP
 #line 235 "./cool.flex"
 { return CASE; }
 	YY_BREAK
 /* ESAC */
-case 27:
+case 28:
 YY_RULE_SETUP
 #line 238 "./cool.flex"
 { return ESAC; }
 	YY_BREAK
 /* OF */
-case 28:
+case 29:
 YY_RULE_SETUP
 #line 241 "./cool.flex"
 { return OF; }
 	YY_BREAK
 /* NEW */
-case 29:
+case 30:
 YY_RULE_SETUP
 #line 244 "./cool.flex"
 { return NEW; }
 	YY_BREAK
 /* ISVOID */
-case 30:
+case 31:
 YY_RULE_SETUP
 #line 247 "./cool.flex"
 { return ISVOID; }
 	YY_BREAK
 /* NOT */
-case 31:
+case 32:
 YY_RULE_SETUP
 #line 250 "./cool.flex"
 { return NOT; }
 	YY_BREAK
 /* INT_CONST */
-case 32:
+case 33:
 YY_RULE_SETUP
 #line 254 "./cool.flex"
 {
@@ -2180,7 +2148,7 @@ YY_RULE_SETUP
 }
 	YY_BREAK
 /* BOOL_CONST */
-case 33:
+case 34:
 YY_RULE_SETUP
 #line 260 "./cool.flex"
 {
@@ -2188,7 +2156,7 @@ YY_RULE_SETUP
     return BOOL_CONST;
 }
 	YY_BREAK
-case 34:
+case 35:
 YY_RULE_SETUP
 #line 265 "./cool.flex"
 {
@@ -2197,13 +2165,13 @@ YY_RULE_SETUP
 }
 	YY_BREAK
 /* White Space */
-case 35:
+case 36:
 YY_RULE_SETUP
 #line 271 "./cool.flex"
 { }
 	YY_BREAK
 /* TYPEID */
-case 36:
+case 37:
 YY_RULE_SETUP
 #line 274 "./cool.flex"
 {
@@ -2212,19 +2180,10 @@ YY_RULE_SETUP
     return TYPEID;
 }
 	YY_BREAK
-/* To treat lines. */
-case 37:
-/* rule 37 can match eol */
-YY_RULE_SETUP
-#line 281 "./cool.flex"
-{
-    curr_lineno++;
-}
-	YY_BREAK
 /* OBJECTID */
 case 38:
 YY_RULE_SETUP
-#line 286 "./cool.flex"
+#line 281 "./cool.flex"
 {
     cool_yylval.symbol = idtable.add_string(yytext);
     return OBJECTID;
@@ -2237,99 +2196,99 @@ YY_RULE_SETUP
 /* ASSIGN */
 case 39:
 YY_RULE_SETUP
-#line 297 "./cool.flex"
+#line 292 "./cool.flex"
 { return ASSIGN; }
 	YY_BREAK
 /* LE */
 case 40:
 YY_RULE_SETUP
-#line 300 "./cool.flex"
+#line 295 "./cool.flex"
 { return LE; }
 	YY_BREAK
 /* DARROW */
 case 41:
 YY_RULE_SETUP
-#line 303 "./cool.flex"
+#line 298 "./cool.flex"
 { return DARROW; }
 	YY_BREAK
 case 42:
 YY_RULE_SETUP
-#line 305 "./cool.flex"
+#line 300 "./cool.flex"
 { return int('+'); }
 	YY_BREAK
 case 43:
 YY_RULE_SETUP
-#line 307 "./cool.flex"
+#line 302 "./cool.flex"
 { return int('-'); }
 	YY_BREAK
 case 44:
 YY_RULE_SETUP
-#line 309 "./cool.flex"
+#line 304 "./cool.flex"
 { return int('*'); }
 	YY_BREAK
 case 45:
 YY_RULE_SETUP
-#line 311 "./cool.flex"
+#line 306 "./cool.flex"
 { return int('/'); }
 	YY_BREAK
 case 46:
 YY_RULE_SETUP
-#line 313 "./cool.flex"
+#line 308 "./cool.flex"
 { return int('<'); }
 	YY_BREAK
 case 47:
 YY_RULE_SETUP
-#line 315 "./cool.flex"
+#line 310 "./cool.flex"
 { return int('='); }
 	YY_BREAK
 case 48:
 YY_RULE_SETUP
-#line 317 "./cool.flex"
+#line 312 "./cool.flex"
 { return int('.'); }
 	YY_BREAK
 case 49:
 YY_RULE_SETUP
-#line 319 "./cool.flex"
+#line 314 "./cool.flex"
 { return int(';'); }
 	YY_BREAK
 case 50:
 YY_RULE_SETUP
-#line 321 "./cool.flex"
+#line 316 "./cool.flex"
 { return int('~'); }
 	YY_BREAK
 case 51:
 YY_RULE_SETUP
-#line 323 "./cool.flex"
+#line 318 "./cool.flex"
 { return int('{'); }
 	YY_BREAK
 case 52:
 YY_RULE_SETUP
-#line 325 "./cool.flex"
+#line 320 "./cool.flex"
 { return int('}'); }
 	YY_BREAK
 case 53:
 YY_RULE_SETUP
-#line 327 "./cool.flex"
+#line 322 "./cool.flex"
 { return int('('); }
 	YY_BREAK
 case 54:
 YY_RULE_SETUP
-#line 329 "./cool.flex"
+#line 324 "./cool.flex"
 { return int(')'); }
 	YY_BREAK
 case 55:
 YY_RULE_SETUP
-#line 331 "./cool.flex"
+#line 326 "./cool.flex"
 { return int(':'); }
 	YY_BREAK
 case 56:
 YY_RULE_SETUP
-#line 333 "./cool.flex"
+#line 328 "./cool.flex"
 { return int('@'); }
 	YY_BREAK
 case 57:
 YY_RULE_SETUP
-#line 335 "./cool.flex"
+#line 330 "./cool.flex"
 { return int(','); }
 	YY_BREAK
 /* =====
@@ -2338,7 +2297,7 @@ YY_RULE_SETUP
   */
 case 58:
 YY_RULE_SETUP
-#line 342 "./cool.flex"
+#line 337 "./cool.flex"
 {
     yylval.error_msg = yytext;
     return ERROR;
@@ -2346,10 +2305,10 @@ YY_RULE_SETUP
 	YY_BREAK
 case 59:
 YY_RULE_SETUP
-#line 347 "./cool.flex"
+#line 342 "./cool.flex"
 ECHO;
 	YY_BREAK
-#line 2353 "cool-flex-lexer.cc"
+#line 2312 "cool-flex-lexer.cc"
 case YY_STATE_EOF(INITIAL):
 case YY_STATE_EOF(INLINE_COMMENTS):
 	yyterminate();
@@ -2752,10 +2711,6 @@ static int yy_get_next_buffer (void)
 
 /* %% [18.0] update yylineno here */
 
-    if ( c == '\n' ){
-        --yylineno;
-    }
-
 	(yytext_ptr) = yy_bp;
 	(yy_hold_char) = *yy_cp;
 	(yy_c_buf_p) = yy_cp;
@@ -2840,10 +2795,6 @@ static int yy_get_next_buffer (void)
 	(yy_hold_char) = *++(yy_c_buf_p);
 
 /* %% [19.0] update BOL and yylineno */
-	if ( c == '\n' )
-		
-    yylineno++;
-;
 
 	return c;
 }
@@ -3403,9 +3354,6 @@ static int yy_init_globals (void)
      * This function is called from yylex_destroy(), so don't allocate here.
      */
 
-    /* We do not touch yylineno unless the option is enabled. */
-    yylineno =  1;
-    
     (yy_buffer_stack) = NULL;
     (yy_buffer_stack_top) = 0;
     (yy_buffer_stack_max) = 0;
@@ -3510,6 +3458,6 @@ void yyfree (void * ptr )
 
 /* %ok-for-header */
 
-#line 347 "./cool.flex"
+#line 342 "./cool.flex"
 
 
