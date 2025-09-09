@@ -1,0 +1,12 @@
+/home/roman/sibsutis/web2026/ValeraGame/obj/Debug/net8.0/ValeraGame.GeneratedMSBuildEditorConfig.editorconfig
+/home/roman/sibsutis/web2026/ValeraGame/obj/Debug/net8.0/ValeraGame.AssemblyInfoInputs.cache
+/home/roman/sibsutis/web2026/ValeraGame/obj/Debug/net8.0/ValeraGame.AssemblyInfo.cs
+/home/roman/sibsutis/web2026/ValeraGame/obj/Debug/net8.0/ValeraGame.csproj.CoreCompileInputs.cache
+/home/roman/sibsutis/web2026/ValeraGame/obj/Debug/net8.0/ValeraGame.sourcelink.json
+/home/roman/sibsutis/web2026/ValeraGame/bin/Debug/net8.0/ValeraGame.deps.json
+/home/roman/sibsutis/web2026/ValeraGame/bin/Debug/net8.0/ValeraGame.dll
+/home/roman/sibsutis/web2026/ValeraGame/bin/Debug/net8.0/ValeraGame.pdb
+/home/roman/sibsutis/web2026/ValeraGame/obj/Debug/net8.0/ValeraGame.dll
+/home/roman/sibsutis/web2026/ValeraGame/obj/Debug/net8.0/refint/ValeraGame.dll
+/home/roman/sibsutis/web2026/ValeraGame/obj/Debug/net8.0/ValeraGame.pdb
+/home/roman/sibsutis/web2026/ValeraGame/obj/Debug/net8.0/ref/ValeraGame.dll
