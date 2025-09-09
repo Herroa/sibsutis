@@ -1,1 +1,8 @@
-/databases2026
+
+/databases2026/*
+
+
+*.zip
+*.sql
+*.dump
+*.bak
